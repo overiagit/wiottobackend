@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -7,7 +7,19 @@ use yii\widgets\ActiveForm;
 /* @var $model backend\models\Hotel */
 /* @var $data array */
 /* @var $form yii\widgets\ActiveForm */
+
+//$this->registerJsFile('@web/summernote/summernote-bs4.min.js',['depends' => [\yii\web\JqueryAsset::class]]);
+//$this->registerCssFile('@web/summernote/summernote-bs4.min.css');
+//  $this->registerJsFile('@web/summernote/editor.js',
+//      ['depends' => [\yii\web\JqueryAsset::class]
+//          ,'position' => \yii\web\View::POS_END]
+//  );
+
+  \backend\assets\AppAssetSummerNote::register($this);
 ?>
+
+<!--  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>-->
 
 <div class="hotel-form">
 
@@ -95,18 +107,61 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 <!--    --><?//= $form->field($model, 'town_region_id')->textInput() ?>
-
-    <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
-
-
-
+    <div class="form-group row">
+        <div class="col col-md-10">
+        <?= $form->field($model, 'note')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+             <?=Html::button('EN',['id'=>'btn_note_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10 ">
+         <?= Html::textarea('note_ru', $data['note']['ru']['note'],['id'=>'txt_note_ru','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+         <div class="col col-md-2 align-content-center">
+             <?=Html::button('RU',['id'=>'btn_note_ru','class'=>"btn btn-primary  btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10">
+        <?= Html::textarea('note_fr', $data['note']['fr']['note'],['id'=>'txt_note_fr','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+         <div class="col col-md-2 align-content-center">
+             <?=Html::button('FR',['id'=>'btn_note_fr','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+          </div>
+    </div>
     <?= $form->field($model, 'country_id')->hiddenInput()->label(false); ?>
-
-
-
-    <?= $form->field($model, 'condition')->textarea(['rows' => 6]) ?>
+<!--    --><?//= $form->field($model, 'condition')->textarea(['rows' => 6]) ?>
+    <div class="form-group row">
+        <div class="col col-md-10">
+            <?= $form->field($model, 'condition')->textarea(['id'=>'txt_condition_en','rows' => 6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('EN',['id'=>'btn_condition_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10 ">
+            <?= Html::textarea('condition_ru', $data['note']['ru']['condition'],['id'=>'txt_condition_ru','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('RU',['id'=>'btn_condition_ru','class'=>"btn btn-primary  btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10 ">
+            <?= Html::textarea('condition_fr', $data['note']['fr']['condition'],['id'=>'txt_condition_fr','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('FR',['id'=>'btn_condition_fr','class'=>"btn btn-primary  btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10 ">
+    <?= $form->field($model, 'comment')->textarea(['rows' => 3]) ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -115,3 +170,24 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade modal-lg" id="frmEditor" tabindex="-1" role="dialog" aria-labelledby="frmEditorCenterTitle" aria-hidden="true">
+      <div class="modal-dialog-scrollable modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="frmEditorLongTitle">Note</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div id="summernote"></div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="btnSaveNote">Save changes</button>
+              </div>
+          </div>
+      </div>
+  </div>

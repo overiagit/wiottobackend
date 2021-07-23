@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb4883465a5aa986185706184c70e807",
+    "content-hash": "794357bf45e3b67421e170f63259ba37",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -345,6 +345,108 @@
             "time": "2020-06-29T00:56:53+00:00"
         },
         {
+            "name": "froala/wysiwyg-editor",
+            "version": "v4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/froala/wysiwyg-editor.git",
+                "reference": "aecce63326ef7901cadc3a003b64bff8b6fa5a70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/froala/wysiwyg-editor/zipball/aecce63326ef7901cadc3a003b64bff8b6fa5a70",
+                "reference": "aecce63326ef7901cadc3a003b64bff8b6fa5a70",
+                "shasum": ""
+            },
+            "type": "component",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Froala Labs",
+                    "email": "support@froala.com"
+                }
+            ],
+            "description": "A beautiful jQuery WYSIWYG HTML rich text editor. High performance and modern design make it easy to use for developers and loved by users.",
+            "homepage": "https://www.froala.com/wysiwyg-editor",
+            "keywords": [
+                "editor",
+                "froala",
+                "froala-editor",
+                "froala-wysiwyg",
+                "html",
+                "javascript",
+                "jquery",
+                "jquery-plugin",
+                "rich editor",
+                "rich text editor",
+                "rte",
+                "text",
+                "wysiwyg"
+            ],
+            "support": {
+                "issues": "https://www.froala.com/wysiwyg-editor/contact",
+                "source": "https://github.com/froala/wysiwyg-editor/tree/v4.0.3"
+            },
+            "time": "2021-07-06T13:34:00+00:00"
+        },
+        {
+            "name": "froala/yii2-froala-editor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/froala/yii2-froala-editor.git",
+                "reference": "a7a189c4aba47673c5c553377fbb27f11968b1d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/froala/yii2-froala-editor/zipball/a7a189c4aba47673c5c553377fbb27f11968b1d4",
+                "reference": "a7a189c4aba47673c5c553377fbb27f11968b1d4",
+                "shasum": ""
+            },
+            "require": {
+                "froala/wysiwyg-editor": "4.0.3",
+                "rmrevin/yii2-fontawesome": "^2.0 | ^3.0",
+                "yiisoft/yii2": "^2.0"
+            },
+            "default-branch": true,
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "froala\\froalaeditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dungphanxuan",
+                    "email": "dungphanxuan999@gmail.com"
+                }
+            ],
+            "description": "A beautiful WYSIWYG HTML text editor based on HTML5 technology. Cross browser, with mobile support, high performance and Retina Ready modern design.",
+            "keywords": [
+                "editor",
+                "froala",
+                "html",
+                "javascript",
+                "rich editor",
+                "rich text editor",
+                "rte",
+                "text",
+                "wysiwyg"
+            ],
+            "support": {
+                "issues": "https://github.com/froala/yii2-froala-editor/issues",
+                "source": "https://github.com/froala/yii2-froala-editor/tree/v4.0.3"
+            },
+            "time": "2021-07-06T16:42:01+00:00"
+        },
+        {
             "name": "npm-asset/bootstrap",
             "version": "4.6.0",
             "dist": {
@@ -355,6 +457,66 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "rmrevin/yii2-fontawesome",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+                "reference": "a1b448cef7e03a0b5a6286276bef004efa83f323"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/a1b448cef7e03a0b5a6286276bef004efa83f323",
+                "reference": "a1b448cef7e03a0b5a6286276bef004efa83f323",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "^2.0.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "1.0.*",
+                "phpdocumentor/reflection-docblock": "~3.1.0",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\fontawesome\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "keywords": [
+                "asset",
+                "awesome",
+                "bundle",
+                "font",
+                "yii"
+            ],
+            "support": {
+                "issues": "https://github.com/rmrevin/yii2-fontawesome/issues",
+                "source": "https://github.com/rmrevin/yii2-fontawesome"
+            },
+            "time": "2018-04-01T12:51:52+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5496,7 +5658,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "froala/yii2-froala-editor": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

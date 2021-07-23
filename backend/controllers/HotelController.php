@@ -8,6 +8,7 @@ use backend\models\HotelType;
 use backend\models\Island;
 use backend\models\Town;
 use backend\models\TownRegion;
+use backend\models\HotelNote;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -99,9 +100,27 @@ class HotelController extends Controller
         $data['town'] = Town::getList();
         $data['island'] = Island::getList();
         $data['town_region'] = TownRegion::getList();
+        
+      
+         $data['note']['ru'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'ru'])->one();
+         $data['note']['fr'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'fr'])->one();
+        
+//        $data['note']
+//        data['note']['ru'] = HotelNote::
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost  ) {
+            $post = $this->request->post();
+            if ($model->load($post)) {
+                $data['note']['ru']['condition'] = $post['condition_ru'];
+                $data['note']['fr']['condition'] = $post['condition_fr'];
+                $data['note']['ru']['note'] = $post['note_ru'];
+                $data['note']['fr']['note'] = $post['note_fr'];
+                if ($data['note']['fr']->save()
+                    && $data['note']['ru']->save()
+                    && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
         }
 
         return $this->render('update', [
