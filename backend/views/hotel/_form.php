@@ -7,6 +7,8 @@ use yii\widgets\ActiveForm;
 /* @var $model backend\models\Hotel */
 /* @var $data array */
 /* @var $form yii\widgets\ActiveForm */
+ /* @var $imageSearchModel backend\models\HotelImageSearch */
+ /* @var $imageDataProvider yii\data\ActiveDataProvider */
 
 //$this->registerJsFile('@web/summernote/summernote-bs4.min.js',['depends' => [\yii\web\JqueryAsset::class]]);
 //$this->registerCssFile('@web/summernote/summernote-bs4.min.css');
@@ -157,6 +159,20 @@ use yii\widgets\ActiveForm;
             <?=Html::button('FR',['id'=>'btn_condition_fr','class'=>"btn btn-primary  btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
         </div>
     </div>
+
+    <div class="form-group row">
+        <div class="col col-md">
+
+        <?php
+            echo $this->render('_image_grid', [
+            'imageSearchModel' => $imageSearchModel,
+            'imageDataProvider' => $imageDataProvider,
+            ]);
+            ?>
+        </div>
+    </div>
+
+
     <div class="form-group row">
         <div class="col col-md-10 ">
     <?= $form->field($model, 'comment')->textarea(['rows' => 3]) ?>
@@ -166,6 +182,8 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
+
+
 
     <?php ActiveForm::end(); ?>
 

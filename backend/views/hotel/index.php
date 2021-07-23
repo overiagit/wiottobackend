@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'condition:ntext',
 
             ['class' => 'yii\grid\ActionColumn'
-                ,'template'=>'{update}{room}'
+                ,'template'=>'{update}{room}{photo}'
                 ,
                 'buttons' =>[
                     'room'=>function($url, $model, $key){
@@ -56,7 +56,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id'=>$id,
                         ];
                         $url = Url::current(['/room', 'id' => $key]);
-                        $icon = Html::tag('span', '&#9760;', ['class' => "glyphicon glyphicon-$iconName"]);
+                        $icon = Html::tag('span', '&#127958;', ['class' => "glyphicon glyphicon-$iconName"]);
+                        return Html::a($icon, $url, $options);
+                    },
+                    'photo'=>function($url, $model, $key){
+                        $iconName = 'info-sign';
+                        $title = \Yii::t('app', 'Photo');
+                        $id = 'rooms-'.$key;
+                        $options = [
+                            'title'=>$title,
+                            'aria-label'=>$title,
+                            'data-pjax'=>'0',
+                            'id'=>$id,
+                        ];
+                        $url = Url::current(['/hotel-image', 'hotel_id' => $key]);
+                        $icon = Html::tag('span', '&#127976;', ['class' => "glyphicon glyphicon-$iconName"]);
                         return Html::a($icon, $url, $options);
                     },
 
