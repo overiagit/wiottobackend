@@ -11,7 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'filemanager' => [
+            'class' => 'DeLuxis\Yii2SimpleFilemanager\SimpleFilemanagerModule'
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
