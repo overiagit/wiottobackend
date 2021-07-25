@@ -92,9 +92,34 @@ use yii\widgets\ActiveForm;
 
 
 
+<!--    <div class="form-group row">-->
+<!--        <div class="col col-md-10">-->
+<!--    --><?//= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
+<!--        </div>-->
+<!--    </div>-->
+
     <div class="form-group row">
         <div class="col col-md-10">
-    <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'note')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('EN',['id'=>'btn_note_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10 ">
+            <?= Html::textarea('note_ru', $data['note']['ru']['note'],['id'=>'txt_note_ru','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('RU',['id'=>'btn_note_ru','class'=>"btn btn-primary  btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10">
+            <?= Html::textarea('note_fr', $data['note']['fr']['note'],['id'=>'txt_note_fr','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('FR',['id'=>'btn_note_fr','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
         </div>
     </div>
 

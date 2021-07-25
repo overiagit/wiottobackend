@@ -35,9 +35,10 @@ class RoomImageController extends Controller
      * Lists all RoomImage models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($room_id)
     {
         $searchModel = new RoomImageSearch();
+        $searchModel->room_id = $room_id;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

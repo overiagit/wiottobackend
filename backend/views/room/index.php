@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\RoomSearch */
@@ -36,7 +37,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'active',
             //'uni_room_type_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn'
+                ,'template'=>'{view}{update}{delete}{photo}'
+                 ,'buttons' =>[
+                 'photo'=>function($url, $model, $key){
+                        $iconName = 'info-sign';
+                        $title = \Yii::t('app', 'Photo');
+                        $id = 'photo-'.$key;
+                        $options = [
+                            'title'=>$title,
+                            'aria-label'=>$title,
+                            'data-pjax'=>'0',
+                            'id'=>$id,
+                        ];
+                        $url = Url::current(['/room-image', 'room_id' => $key]);
+                        $icon = Html::tag('span', '&#127976;', ['class' => "glyphicon glyphicon-$iconName"]);
+                        return Html::a($icon, $url, $options);
+                    },
+                    ]
+            ],
         ],
     ]); ?>
 

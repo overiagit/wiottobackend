@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use backend\models\Hotel;
 use backend\models\Room;
+use backend\models\RoomImageSearch;
+use backend\models\RoomNote;
 use backend\models\RoomSearch;
 use backend\models\Villa;
 use Yii;
@@ -126,12 +128,25 @@ class RoomController extends Controller
         $data['villa'] =  Villa::getList();
         $data['hotel'] = Hotel::getlist();
 
+        $data['note']['ru'] = RoomNote::find()->where(['room_id' => $id,'lang'=>'ru'])->one();
+        $data['note']['fr'] = RoomNote::find()->where(['room_id' => $id,'lang'=>'fr'])->one();
+
+        $imageSearchModel = new RoomImageSearch();
+        $imageSearchModel->room_id = $id;
+        $imageDataProvider = $imageSearchModel->search($this->request->queryParams);
+        $imageDataProvider->pagination = ['pageSize' => 1000];
+
         if ($this->request->isPost ){
             $post = $this->request->post();
             $model->villa = implode(',',$post['Room']['villa']);
 
                 unset($post['Room']['villa']);
-            if($model->load($post) && $model->save()) {
+
+            $data['note']['ru']['note'] = $post['note_ru'];
+            $data['note']['fr']['note'] = $post['note_fr'];
+            if($model->load($post) && $data['note']['fr']->save()
+                && $data['note']['ru']->save() && $model->save()) {
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -139,6 +154,8 @@ class RoomController extends Controller
         return $this->render('update', [
             'model' => $model,
             'data' =>$data,
+            'imageSearchModel' => $imageSearchModel,
+            'imageDataProvider' => $imageDataProvider,
         ]);
     }
 

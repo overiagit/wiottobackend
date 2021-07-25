@@ -12,17 +12,39 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'hotel_id')->textInput() ?>
+<!--    --><?//= $form->field($model, 'hotel_id')->textInput() ?>
+<!---->
+<!--    --><?//= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <div class="form-group row">
+        <div class="col-6 col-md-2">
+            <?= $form->field($model, 'id')->textInput(['readonly'=>true]) ?>
+        </div>
+        <div class="col-6 col-md-8">
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 
+    <div class="form-group row">
+        <div class="col col-md-10">
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 
+            <div class="form-group row">
+                <div class="col col-md-10">
     <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'isMain')->textInput() ?>
-
-    <?= $form->field($model, 'orderNr')->textInput() ?>
+    <div class="form-group row">
+        <div class="col col-md-3">
+            <?= $form->field($model, 'isMain')->checkbox() ?>
+        </div>
+            <div class="col col-md-3">
+    <?= $form->field($model, 'orderNr')->textInput(['type'=>'number' , 'min'=>'0']) ?>
+            </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
