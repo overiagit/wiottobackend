@@ -97,18 +97,14 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-6 col-md-3">
     <?= $form->field($model, 'latitude')->textInput(['type'=>'number','max' => '360', 'min'=>'0' , 'step' => '0.000001']) ?>
-<!--                            --><?//= $form->field($model, 'latitude')->widget(\yii\widgets\MaskedInput::class, [
-//                                'mask' => '9{1,3}(?:\.9{0,6})?',
-//                            ]) ?>
+
         </div>
         <div class="col-6 col-md-3">
     <?= $form->field($model, 'longitude')->textInput(['type'=>'number','max' => "360", 'min'=>'0' , 'step' => '0.000001']) ?>
-<!--    --><?//= $form->field($model, 'longitude')->widget(\yii\widgets\MaskedInput::class, [
-//        'mask' => '9{1,3}\.{0,1}9{0,6}',
-//    ]) ?>
+
         </div>
     </div>
-<!--    --><?//= $form->field($model, 'town_region_id')->textInput() ?>
+
     <div class="form-group row">
         <div class="col col-md-10">
         <?= $form->field($model, 'note')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
