@@ -130,7 +130,6 @@ use yii\widgets\ActiveForm;
           </div>
     </div>
     <?= $form->field($model, 'country_id')->hiddenInput()->label(false); ?>
-<!--    --><?//= $form->field($model, 'condition')->textarea(['rows' => 6]) ?>
     <div class="form-group row">
         <div class="col col-md-10">
             <?= $form->field($model, 'condition')->textarea(['id'=>'txt_condition_en','rows' => 6]) ?>
@@ -155,7 +154,6 @@ use yii\widgets\ActiveForm;
             <?=Html::button('FR',['id'=>'btn_condition_fr','class'=>"btn btn-primary  btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
         </div>
     </div>
-
 
     <?php if($model->id > 0) : ?>
     <div class="form-group row">

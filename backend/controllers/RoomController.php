@@ -128,8 +128,8 @@ class RoomController extends Controller
         $data['villa'] =  Villa::getList();
         $data['hotel'] = Hotel::getlist();
 
-        $data['note']['ru'] = RoomNote::find()->where(['room_id' => $id,'lang'=>'ru'])->one();
-        $data['note']['fr'] = RoomNote::find()->where(['room_id' => $id,'lang'=>'fr'])->one();
+        $data['note']['ru'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'ru'])->one();
+        $data['note']['fr'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'fr'])->one();
 
         $imageSearchModel = new RoomImageSearch();
         $imageSearchModel->room_id = $id;
