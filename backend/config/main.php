@@ -50,6 +50,7 @@ return [
                 'room/<id:\d+>' => 'room/index',
                 'hotel-image/<hotel_id:\d+>' => 'hotel-image/index',
                 'room-image/<room_id:\d+>' => 'room-image/index',
+                'hotel-image/create/<hotel_id:\d+>' => 'hotel-image/create',
             ],
         ],
 

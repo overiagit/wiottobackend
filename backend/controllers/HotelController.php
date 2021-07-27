@@ -73,17 +73,74 @@ class HotelController extends Controller
     public function actionCreate()
     {
         $model = new Hotel();
+        $model->id = -1;
+        $data['hotel_type'] = HotelType::getList();
+        $data['town'] = Town::getList();
+        $data['island'] = Island::getList();
+        $data['town_region'] = TownRegion::getList();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+//        $data['note']['ru'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'ru'])->one();
+//        $data['note']['fr'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'fr'])->one();
+
+
+
+        $imageSearchModel = new HotelImageSearch();
+        $imageSearchModel->hotel_id = -9999;
+        $imageDataProvider = $imageSearchModel->search($this->request->queryParams);
+        $imageDataProvider->pagination = ['pageSize' => 1000];
+
+
+//        if ($this->request->isPost) {
+//            if ($model->load($this->request->post()) && $model->save()) {
+//                return $this->redirect(['view', 'id' => $model->id]);
+//            }
+//        } else {
+//            $model->loadDefaultValues();
+//        }
+
+        if ($this->request->isPost  ) {
+            $post = $this->request->post();
+            $post['Hotel']['id'] = Hotel::getLastId() + 1;
+            if ($model->load($post) ) {
+                $model->country_id = 582;
+                if ($model->save()) {
+
+//                    $data['note']['ru']['hotel_id'] = $model->id;
+//                    $data['note']['fr']['hotel_id'] = $model->id;
+//                    $data['note']['ru']['condition'] = $post['condition_ru'];
+//                    $data['note']['fr']['condition'] = $post['condition_fr'];
+//                    $data['note']['ru']['note'] = $post['note_ru'];
+//                    $data['note']['fr']['note'] = $post['note_fr'];
+
+                    $note_ru = new HotelNote();
+                    $note_ru->hotel_id = $model->id;
+                    $note_ru->lang = 'ru';
+                    $note_ru->note = $post['note_ru'];
+                    $note_ru->condition = $post['condition_ru'];
+                    $note_ru->id = HotelNote::getLastId()+1;
+
+                    $note_fr = new HotelNote();
+                    $note_fr->hotel_id = $model->id;
+                    $note_fr->lang = 'fr';
+                    $note_fr->note = $post['note_fr'];
+                    $note_fr->condition = $post['condition_fr'];
+                    $note_fr->id = HotelNote::getLastId()+2;
+
+                    if ($note_fr->save() && $note_ru->save() ) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                    else{
+
+                    }
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
             'model' => $model,
+            'data'=>$data,
+            'imageSearchModel' => $imageSearchModel,
+            'imageDataProvider' => $imageDataProvider,
         ]);
     }
 

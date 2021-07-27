@@ -15,7 +15,8 @@ use yii\widgets\Pjax;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Hotel Image', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Hotel Image', ['hotel-image/create/'.$searchModel->hotel_id]
+            , ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

@@ -52,4 +52,8 @@ class HotelImage extends \yii\db\ActiveRecord
             'orderNr' => 'Order Nr',
         ];
     }
+
+    public static function getLastId(){
+        return  self::find()->max('id');
+    }
 }

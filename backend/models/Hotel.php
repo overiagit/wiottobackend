@@ -49,7 +49,7 @@ class Hotel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'type_id', 'town_id', 'name'], 'required'],
+            [['id', 'type_id', 'town_id', 'name'], 'required', 'message' => 'Requered filds'],
             [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id'], 'integer'],
             [['latitude', 'longitude'], 'number'],
             [['comment', 'note', 'condition'], 'string'],
@@ -126,6 +126,10 @@ class Hotel extends \yii\db\ActiveRecord
                  , ifnull(concat(' island:',`t_island`.`name` ),'')) as `name`"])
             ->orderBy(['`t_hotel`.`name`'=>SORT_ASC])
                  ->all(), 'id', 'name');
+    }
+
+    public static function getLastId(){
+        return  self::find()->max('id');
     }
 
 }

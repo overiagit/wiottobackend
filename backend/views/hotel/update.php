@@ -19,8 +19,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'data'=> $data
-        ,
+        'data'=> $data,
         'imageSearchModel' => $imageSearchModel,
         'imageDataProvider' => $imageDataProvider,
     ]) ?>

@@ -59,4 +59,8 @@ class RoomNote extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+
+    public static function getLastId(){
+        return  self::find()->max('id');
+    }
 }
