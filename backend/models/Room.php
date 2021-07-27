@@ -83,9 +83,15 @@ class Room extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getRoomList($hotel_id)
+    public static function getList($hotel_id)
     {
         return ArrayHelper::map(self::find()->where(['hotel_id'=>$hotel_id])->select('id, name')->all(), 'id', 'name');
+    }
+
+    public static function getDataList($hotel_id)
+    {
+        return ArrayHelper::map(self::find()->where(['hotel_id'=>$hotel_id])
+            ->select(['id', "concat(name , ' ', id) as name"])->all(), 'id', 'name');
     }
 
     public static function getLastId(){
