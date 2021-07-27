@@ -18,11 +18,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'id')->textInput(['readonly'=>true]) ?>
-<!--    <div class="row">-->
-<!--        <div class="col-6 col-md-4"><span>ID-</span><span>--><?//= $model['id'] ?><!--</span></div>-->
-<!--        <div class="col-6 col-md-8"><span>--><?//= $model['title'] ?><!--</span></div>-->
-<!--    </div>-->
-
     <?= Html::hiddenInput("name", $model['title'], ['id'=>'hidden_name'])?>
     <?= Html::hiddenInput("hotel_id", $model['hotel_id'], ['id'=>'hidden_hotel_id'])?>
 
@@ -30,8 +25,7 @@ use yii\widgets\ActiveForm;
         <div class="col col-md-3">
             <?= $form->field($model, 'room_type_id')->textInput(['readonly'=>true , ])->label(false) ?>
         </div>
-            <!--        <div class="col-6 col-md-4"><span>ROOM_ID-</span><span>--><?//= $model['room_type_id'] ?><!--</span></div>-->
-<!--        <div class="col-6 col-md-8">-->
+
             <div class="col col-md-6">
 
                 <?= $form->field($model, 'room_type_id')->dropDownList(
@@ -44,26 +38,17 @@ use yii\widgets\ActiveForm;
         <div class="col col-md-3">
         <?=Html::button('Add room',['class'=>"btn btn-primary", 'data-toggle'=>"modal" ,'data-target'=>"#frmCreateRoom"]); ?>
         </div>
-<!--        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">-->
-<!--            Add room-->
-<!--        </button>-->
+
             </div>
-<!--        </div>-->
-<!--    </div>-->
 
 
-<!---->
-<!--    --><?//= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-<!---->
-<!--    --><?//= $form->field($model, 'room_type_id')->textInput() ?>
-<!---->
-<!--    --><?//= $form->field($model, 'hotel_uni_id')->textInput() ?>
-<!---->
+
+
     <?= $form->field($model, 'hotel_id')->textInput(['readonly'=>true]) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true,'readonly'=>true]) ?>
 
-<!--    --><?//= $form->field($model, 'date_add')->textInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -86,14 +71,10 @@ use yii\widgets\ActiveForm;
                 </button>
             </div>
             <div class="modal-body">
-<!--                <div class="form-group row">-->
-<!--                    <div class="col col-md-10">-->
-<!--                --><?//= Html::input('text','r_new_name',$model->title,['readonly'=>true,'id'=>'new_room','class'=>'form-control'])?>
-<!--                    </div></div>-->
+
                 <div class="form-group row">
                     <div class="col col-md-5 h-auto">
                         <label  class="control-label"  for="chlVilla">Villa</label>
-<!--                --><?//= Html::dropDownList('villa', null, $data['villa'] ,['class'=>'form-control'])?>
                         <?= Html::checkboxList('villa', '0', $data['villa'] ,['class'=>'form-control h-auto', 'id'=>'chlVilla'])?>
 
                 </div>
