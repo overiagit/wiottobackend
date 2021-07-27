@@ -11,8 +11,6 @@ use yii\widgets\ActiveForm;
 
 <div class="uni-hotel-form">
     <?php $form = ActiveForm::begin(); ?>
-
-
     <div class="form-group row">
         <div class="col-6 col-md-2">
             <?= $form->field($model, 'id' )->textInput(['readonly'=>true]) ?>
@@ -28,10 +26,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'starId' )->textInput(['readonly'=>true]) ?>
         </div>
         <div class="col-6 col-md-8">
-<!--                --><?//= $form->field($model, 'starId')->dropDownList(
-//                    $data['star'],
-//                    ['prompt' => '']
-//                ) ?>
+
             <label for="txtStarName" class="control-label">Star</label>
            <?= Html::textInput('',$model->getStarName(), ['id'=>'txtStarName','readonly'=>true, 'class'=>'form-control']) ?>
         </div>
@@ -73,31 +68,12 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-<!--    <div class="form-group row">-->
-<!--        <div class="col-6 col-md-2">-->
-<!--    --><?//= $form->field($model, 'hotel_id')->textInput(['readonly'=>true]) ?>
-<!--        </div>-->
-<!--            <div class="col-6 col-md-8">-->
-<!--                            --><?//= $form->field($model, 'hotel_id')->dropDownList(
-//                                $data['hotel'],
-//                                ['prompt' => '']
-//                            )->label("Wiotto hotel") ?>
-<!--        </div>-->
-<!--    </div>-->
-
-
     <div class="form-group row">
         <div class="col-6 col-md-3">
     <?= $form->field($model, 'Longitude')->textInput(['type'=>'number','maxlength' => true,'readonly'=>true]) ?>
-<!--            --><?//= $form->field($model, 'Longitude')->widget(\yii\widgets\MaskedInput::class, [
-//                'mask' => '999\.999999',
-//            ]) ?>
         </div>
             <div class="col-6 col-md-3">
     <?= $form->field($model, 'Latitude')->textInput(['type'=>'number','maxlength' => true,'readonly'=>true]) ?>
-<!--                --><?//= $form->field($model, 'Latitude')->widget(\yii\widgets\MaskedInput::class, [
-//                    'mask' => '999\.999999',
-//                ]) ?>
             </div>
         <div class="col-6 col-md-3">
     <?= $form->field($model, 'date_add')->textInput(['readonly'=>true]) ?>
