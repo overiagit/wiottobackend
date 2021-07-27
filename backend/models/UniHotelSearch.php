@@ -49,7 +49,7 @@ class UniHotelSearch extends UniHotel
 
         $query->select(['t_uni_hotel.id as id','t_uni_hotel.starId as starId','t_uni_hotel.title as title'
             , 't_uni_hotel.ResortId as ResortId', 't_uni_hotel.CountryId as CountryId'
-            ,'t_uni_hotel.hotel_id as hotel_id','t_uni_hotel.date_add as date_add', 't_hotel.name  as wiotto_hotel_name' ]);
+            ,'ifnull(t_uni_hotel.hotel_id,0) as hotel_id','t_uni_hotel.date_add as date_add', 't_hotel.name  as wiotto_hotel_name' ]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -71,7 +71,7 @@ class UniHotelSearch extends UniHotel
             't_uni_hotel.starId' => $this->starId,
             't_uni_hotel.ResortId' => $this->ResortId,
             't_uni_hotel.CountryId' => $this->CountryId,
-            't_uni_hotel.hotel_id' => $this->hotel_id,
+            'ifnull(t_uni_hotel.hotel_id,0)' => $this->hotel_id,
             't_uni_hotel.date_add' => $this->date_add,
         ]);
 
