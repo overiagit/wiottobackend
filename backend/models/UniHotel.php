@@ -117,6 +117,16 @@ class UniHotel extends \yii\db\ActiveRecord
             return $item->getAttribute('TitleEn');
     }
 
+
+    public function updateRooms()
+    {
+        Yii::$app->db1->createCommand('update t_uni_room_type set hotel_id = :hotel_id', [
+            ':hotel_id' => $this->hotel_id,
+        ])->execute();
+
+         return true;
+    }
+
     public function getResort()
     {
         return $this->hasOne(UniResort::className(), ['id' => 'ResortId']);

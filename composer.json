@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "froala/yii2-froala-editor": "dev-master",
         "de-luxis/yii2-simple-filemanager": "dev-master",
-        "hail812/yii2-adminlte3": "dev-master"
+        "hail812/yii2-adminlte3": "dev-master",
+        "pendalf89/yii2-filemanager": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

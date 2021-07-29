@@ -6,6 +6,7 @@ use backend\models\Hotel;
 use backend\models\UniHotel;
 use backend\models\UniHotelSearch;
 use backend\models\UniHotelStar;
+use backend\models\UniRoom;
 use backend\models\UniRoomSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -107,7 +108,13 @@ class UniHotelController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()
+          && $model->updateRooms()
+        )
+        {
+
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
