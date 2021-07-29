@@ -130,7 +130,8 @@ class UniHotel extends \yii\db\ActiveRecord
 
     public function getResort()
     {
-        return $this->hasOne(UniResort::className(), ['id' => 'ResortId']);
+        $uh = $this->hasOne(UniResort::className(), ['id' => 'ResortId']);
+        return $uh;
     }
 
     public function getCountryName()

@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-12 col-md-8">
 <div class="uni-room-form">
+    <div class="text-info"><span>UniHotel:</span><h3><?= Html::encode($model->getUniHotel()->title) ?></h3></div>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'id')->textInput(['readonly'=>true]) ?>

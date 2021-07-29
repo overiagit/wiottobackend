@@ -29,7 +29,7 @@ $this->registerJsFile('@web/js/room.js',
 
 <div class="uni-room-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <?= $this->render('_form', [
         'model' => $model,
