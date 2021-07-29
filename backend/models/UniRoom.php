@@ -73,6 +73,8 @@ class UniRoom extends \yii\db\ActiveRecord
         return $this->hasOne(Room::className(), ['id' => 'room_type_id']);
     }
 
+
+
     public function getRoomName()
     {
         $item = $this->getRoom()->one();
