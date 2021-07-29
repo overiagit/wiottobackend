@@ -122,7 +122,7 @@ class UniHotel extends \yii\db\ActiveRecord
     {
         Yii::$app->db1->createCommand('update t_uni_room_type set hotel_id = :hotel_id
            where hotel_uni_id = :hotel_uni_id', [
-            ':hotel_id' => $this->hotel_id, ':uni_hotel_id' => $this->hotel_uni_id,
+            ':hotel_id' => $this->hotel_id, ':hotel_uni_id' => $this->id,
         ])->execute();
 
          return true;

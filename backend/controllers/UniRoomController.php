@@ -99,7 +99,7 @@ class UniRoomController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-         $data['room'] = Room::getDataList($model['hotel_id']);
+         $data['room'] = Room::getDataList($model->hotel_id);
          $data['villa'] =  Villa::getList();
 //         $newRoom = new Room();
         return $this->render('update', [
