@@ -79,8 +79,8 @@ class HotelController extends Controller
         $data['island'] = Island::getList();
         $data['town_region'] = TownRegion::getList();
 
-//        $data['note']['ru'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'ru'])->one();
-//        $data['note']['fr'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'fr'])->one();
+        $data['note']['ru']['note'] = "";
+       $data['note']['fr']['note'] = "";
 
 
 
