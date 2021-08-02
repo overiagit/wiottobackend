@@ -82,6 +82,9 @@ class HotelController extends Controller
         $data['note']['ru']['note'] = "";
        $data['note']['fr']['note'] = "";
 
+        $data['note']['ru']['condition'] = "";
+        $data['note']['fr']['condition'] = "";
+
 
 
         $imageSearchModel = new HotelImageSearch();
