@@ -13,6 +13,7 @@ use backend\models\HotelNote;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use function Webmozart\Assert\Tests\StaticAnalysis\length;
 
 /**
  * HotelController implements the CRUD actions for Hotel model.
@@ -80,7 +81,7 @@ class HotelController extends Controller
         $data['town_region'] = TownRegion::getList();
 
         $data['note']['ru']['note'] = "";
-       $data['note']['fr']['note'] = "";
+        $data['note']['fr']['note'] = "";
 
         $data['note']['ru']['condition'] = "";
         $data['note']['fr']['condition'] = "";
@@ -118,23 +119,26 @@ class HotelController extends Controller
                     $note_ru = new HotelNote();
                     $note_ru->hotel_id = $model->id;
                     $note_ru->lang = 'ru';
-                    $note_ru->note = $post['note_ru'];
-                    $note_ru->condition = $post['condition_ru'];
+                    $note_ru->note = trim($post['note_ru']);
+                    $note_ru->condition = trim($post['condition_ru']);
                     $note_ru->id = HotelNote::getLastId()+1;
 
                     $note_fr = new HotelNote();
                     $note_fr->hotel_id = $model->id;
                     $note_fr->lang = 'fr';
-                    $note_fr->note = $post['note_fr'];
-                    $note_fr->condition = $post['condition_fr'];
+                    $note_fr->note = trim($post['note_fr']);
+                    $note_fr->condition = trim($post['condition_fr']);
                     $note_fr->id = HotelNote::getLastId()+2;
+                    $res = 0;
 
-                    if ($note_fr->save() && $note_ru->save() ) {
+                    if (strlen($note_fr->note) > 0 || strlen($note_fr->condition) > 0)
+                       $note_fr->save();
+
+                    if (strlen($note_ru->note) > 0 || strlen($note_fr->condition) > 0)
+                       $note_ru->save();
+
                         return $this->redirect(['view', 'id' => $model->id]);
-                    }
-                    else{
 
-                    }
                 }
             }
         }
