@@ -40,7 +40,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             'hotel_uni_id',
-//            'hotel_id',
+            [
+                'attribute' => 'uni_hotel',
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getUniHotel()->title;
+                },
+//                'format' =>'raw',
+//                'filter' => Html::activeDropDownList($searchModel
+//                    , 'wiotto_hotel_name', Hotel::getHotelList(),
+//                    ['class' => 'form-control', 'prompt' => 'Все']),
+//                'filter' => true,
+                'filter' => Html::activeInput('text',$searchModel,'uni_hotel',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
             //'description',
             //'date_add',
 
