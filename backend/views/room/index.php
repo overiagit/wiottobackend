@@ -77,10 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'note_ru',
                 'contentOptions' => ['style' => 'width:100px;'],
                 'value' => function ($model, $key, $index, $column) {
-                     $note = $model->getNoteLangRu()->note;
+                     $note = $model->getNoteLangRu();
                      if($note)
-                          return strip_tags(Html::decode(substr( $note , 0, 15))).'...';
-                     return  $note;
+                          return strip_tags(Html::decode(substr( $note->note , 0, 15))).'...';
+                     return  $note->note;
 
                 },
 
@@ -88,10 +88,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'note_fr',
                 'value' => function ($model, $key, $index, $column) {
-                    $note = $model->getNoteLangFr()->note;
+                    $note = $model->getNoteLangFr();
                     if($note)
-                        return strip_tags(Html::decode(substr( $note , 0, 15))).'...';
-                    return  $note;
+                        return strip_tags(Html::decode(substr( $note->note , 0, 15))).'...';
+                    return  $note->note;
                     },
 
             ],
