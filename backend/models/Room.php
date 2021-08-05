@@ -120,6 +120,18 @@ class Room extends \yii\db\ActiveRecord
 
 
     /**
+     * Gets query for [[Room]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getHotel()
+    {
+        return $this->hasOne(Hotel::className(), ['id' => 'hotel_id'])->one();
+
+    }
+
+
+    /**
      * Gets ids .
      *
      * @return string
@@ -129,35 +141,55 @@ class Room extends \yii\db\ActiveRecord
         return $this->getUniRooms()->select(['group_concat(id) as ids'])->scalar();
     }
 
+    /**
+     * Gets ids .
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(RoomImage::className(), ['room_id' => 'id']);
+    }
 
-//
-//    /**
-//     * Gets query for [[TUniRoomType217s]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getTUniRoomType217s()
-//    {
-//        return $this->hasMany(TUniRoomType217::className(), ['room_type_id' => 'id']);
-//    }
-//
-//    /**
-//     * Gets query for [[TUniRoomTypeBackup2106232358s]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getTUniRoomTypeBackup2106232358s()
-//    {
-//        return $this->hasMany(TUniRoomTypeBackup2106232358::className(), ['room_type_id' => 'id']);
-//    }
-//
-//    /**
-//     * Gets query for [[TUniRoomTypeCopy1s]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getTUniRoomTypeCopy1s()
-//    {
-//        return $this->hasMany(TUniRoomTypeCopy1::className(), ['room_type_id' => 'id']);
-//    }
+    /**
+     * Gets ids .
+     *
+     * @return string
+     */
+    public function getImageIds()
+    {
+        return $this->getImages()->select(["group_concat( id, ', ') as ids"])->scalar();
+    }
+
+    /**
+     * Gets ids .
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNoteLang()
+    {
+        return $this->hasMany(RoomNote::className(), ['room_type_id' => 'id']);
+    }
+
+    /**
+     * Gets ids .
+     *
+     * @return array
+     */
+    public function getNoteLangRu()
+    {
+        return $this->getNoteLang()->where(['lang'=>'ru'])->one();
+    }
+
+    /**
+     * Gets ids .
+     *
+     * @return array
+     */
+    public function getNoteLangFr()
+    {
+        return $this->getNoteLang()->where(['lang'=>'fr'])->one();
+    }
+
+
 }

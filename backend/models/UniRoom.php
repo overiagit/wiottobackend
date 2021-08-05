@@ -82,8 +82,8 @@ class UniRoom extends \yii\db\ActiveRecord
      */
     public function getUniHotel()
     {
-        $uh = $this->hasOne(UniHotel::className(), ['id' => 'hotel_uni_id'])->one();
-        return $uh;
+        return $this->hasOne(UniHotel::className(), ['id' => 'hotel_uni_id'])->one();
+
     }
 
     public function getRoomName()

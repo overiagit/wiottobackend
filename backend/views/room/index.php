@@ -22,6 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            'options'=>['class'=>'pagination , btn'],
+            'maxButtonCount'=>25,    // Set maximum number of page buttons that can be displayed
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
@@ -31,21 +35,65 @@ $this->params['breadcrumbs'][] = $this->title;
             'exbeds',
             //'note:ntext',
             'hotel_id',
+            [
+                'attribute' => 'hotel_name',
+                'contentOptions' => [ 'style' => 'width: 7%;' ],
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getHotel()->name;
+                },
+
+                'filter' => Html::activeInput('text',$searchModel,'hotel_name',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
             'active',
 //            'uni_room_type_ids',
 
             [
                 'attribute' => 'uni_room_type_ids',
+                'contentOptions' => [ 'style' => 'width: 7%;' ],
                 'value' => function ($model, $key, $index, $column) {
                     return  $model->getUniRoomIds();
                 },
-//                'format' =>'raw',
-//                'filter' => Html::activeDropDownList($searchModel
-//                    , 'wiotto_hotel_name', Hotel::getHotelList(),
-//                    ['class' => 'form-control', 'prompt' => 'Все']),
-//                'filter' => true,
+
                 'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
                     ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
+
+            [
+                'attribute' => 'image_ids',
+                'contentOptions' => ['style' => 'width:150px','class' => 'text-wrap'],
+                'value' => function ($model, $key, $index, $column) {
+                   $ids =   $model->getImageIds();
+                   if($ids)
+                    return    substr( $ids, 0, 15).'...';
+                   return $ids ;
+                },
+
+//                'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
+//                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
+
+            [
+                'attribute' => 'note_ru',
+                'contentOptions' => ['style' => 'width:100px;'],
+                'value' => function ($model, $key, $index, $column) {
+                     $note = $model->getNoteLangRu()->note;
+                     if($note)
+                          return strip_tags(Html::decode(substr( $note , 0, 15))).'...';
+                     return  $note;
+
+                },
+
+            ],
+            [
+                'attribute' => 'note_fr',
+                'value' => function ($model, $key, $index, $column) {
+                    $note = $model->getNoteLangFr()->note;
+                    if($note)
+                        return strip_tags(Html::decode(substr( $note , 0, 15))).'...';
+                    return  $note;
+                    },
+
             ],
 
             ['class' => 'yii\grid\ActionColumn'
