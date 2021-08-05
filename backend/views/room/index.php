@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      $note = $model->getNoteLangRu();
                      if($note)
                           return strip_tags(Html::decode(substr( $note->note , 0, 15))).'...';
-                     return  $note->note;
+                     return  $note;
 
                 },
 
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $note = $model->getNoteLangFr();
                     if($note)
                         return strip_tags(Html::decode(substr( $note->note , 0, 15))).'...';
-                    return  $note->note;
+                    return  $note;
                     },
 
             ],
