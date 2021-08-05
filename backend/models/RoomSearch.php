@@ -11,6 +11,8 @@ use backend\models\Room;
  */
 class RoomSearch extends Room
 {
+
+    public  $uni_room_type_ids;
     /**
      * {@inheritdoc}
      */
@@ -56,19 +58,30 @@ class RoomSearch extends Room
             return $dataProvider;
         }
 
+        $query->select(['t_room_type.id','t_room_type.name'
+            ,'t_room_type.villa','t_room_type.rooms','t_room_type.exbeds','t_room_type.note'
+            ,'ifnull(t_room_type.hotel_id, 0) as hotel_id','t_room_type.active'
+            , "ifnull(group_concat(t_uni_room_type.id), 'no') as uni_room_type_ids"]);
+
+        $query->leftJoin('t_uni_room_type', 't_room_type.id = t_uni_room_type.room_type_id' );
+
+        $query->groupBy(['t_room_type.id','t_room_type.name'
+            ,'t_room_type.villa','t_room_type.rooms','t_room_type.exbeds','t_room_type.note'
+            ,'t_room_type.hotel_id','t_room_type.active']);
+
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'rooms' => $this->rooms,
-            'exbeds' => $this->exbeds,
-            'hotel_id' => $this->hotel_id,
-            'active' => $this->active,
-            'uni_room_type_id' => $this->uni_room_type_id,
+            't_room_type.id' => $this->id,
+            't_room_type.rooms' => $this->rooms,
+            't_room_type.exbeds' => $this->exbeds,
+            'ifnull(t_room_type.hotel_id, 0)' => $this->hotel_id,
+            't_room_type.active' => $this->active,
+//            'uni_room_type_ids' => $this->uni_room_type_ids,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'villa', $this->villa])
-            ->andFilterWhere(['like', 'note', $this->note]);
+        $query->andFilterWhere(['like', 't_room_type.name', $this->name])
+            ->andFilterWhere(['like', 't_room_type.villa', $this->villa])
+            ->andFilterWhere(['like', 't_room_type.note', $this->note]);
 
         return $dataProvider;
     }

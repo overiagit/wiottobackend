@@ -108,15 +108,28 @@ class Room extends \yii\db\ActiveRecord
 //        return $this->hasMany(THotelStops::className(), ['room_type_id' => 'id']);
 //    }
 //
-//    /**
-//     * Gets query for [[TUniRoomType1s]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getTUniRoomType1s()
-//    {
-//        return $this->hasMany(TUniRoomType1::className(), ['room_type_id' => 'id']);
-//    }
+    /**
+     * Gets query for [[TUniRoomType1s]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUniRooms()
+    {
+        return $this->hasMany(UniRoom::className(), ['room_type_id' => 'id']);
+    }
+
+
+    /**
+     * Gets ids .
+     *
+     * @return string
+     */
+    public function getUniRoomIds()
+    {
+        return $this->getUniRooms()->select(['group_concat(id) as ids'])->scalar();
+    }
+
+
 //
 //    /**
 //     * Gets query for [[TUniRoomType217s]].

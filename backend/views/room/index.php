@@ -32,7 +32,21 @@ $this->params['breadcrumbs'][] = $this->title;
             //'note:ntext',
             'hotel_id',
             'active',
-            //'uni_room_type_id',
+//            'uni_room_type_ids',
+
+            [
+                'attribute' => 'uni_room_type_ids',
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getUniRoomIds();
+                },
+//                'format' =>'raw',
+//                'filter' => Html::activeDropDownList($searchModel
+//                    , 'wiotto_hotel_name', Hotel::getHotelList(),
+//                    ['class' => 'form-control', 'prompt' => 'Все']),
+//                'filter' => true,
+                'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{view}{update}{delete}{photo}'
