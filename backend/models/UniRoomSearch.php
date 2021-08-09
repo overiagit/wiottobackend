@@ -77,9 +77,10 @@ class UniRoomSearch extends UniRoom
             'date_add' => $this->date_add,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
+        $query->andFilterWhere(['like', 't_uni_room_type.title', $this->title])
+            ->andFilterWhere(['like', 't_uni_room_type.description', $this->description])
             ->andFilterWhere(['like', 't_room_type.name', $this->wiotto_name])
+
             ->andFilterWhere(['like', 't_uni_hotel.title', $this->uni_hotel]);
 
         return $dataProvider;
