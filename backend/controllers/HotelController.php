@@ -170,14 +170,21 @@ class HotelController extends Controller
          $data['note']['ru'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'ru'])->one();
          $data['note']['fr'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'fr'])->one();
 
-         if(empty($data['note']['ru']['note'])){
-             $data['note']['ru']['note'] =  null;
-             $data['note']['ru']['condition'] =  null;
+         if($data['note']['ru'] == null){
+             $data['note']['ru'] =  new HotelNote();
+             $data['note']['ru']['hotel_id']= $id;
+             $data['note']['ru']['lang']= 'ru';
+             $data['note']['ru']['note']= null;
+             $data['note']['ru']['condition']= null;
          }
 
-        if(empty($data['note']['fr']['note'])){
-            $data['note']['fr']['note'] =  null;
-            $data['note']['fr']['condition'] =  null;
+        if($data['note']['fr'] == null){
+            $data['note']['fr'] =  new HotelNote();
+            $data['note']['fr']['hotel_id']= $id;
+            $data['note']['fr']['lang']= 'fr';
+            $data['note']['fr']['note']= null;
+            $data['note']['fr']['condition']= null;
+
         }
 
 
