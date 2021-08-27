@@ -170,6 +170,15 @@ class HotelController extends Controller
          $data['note']['ru'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'ru'])->one();
          $data['note']['fr'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'fr'])->one();
 
+         if(empty($data['note']['ru']['note'])){
+             $data['note']['ru']['note'] =  null;
+             $data['note']['ru']['condition'] =  null;
+         }
+
+        if(empty($data['note']['fr']['note'])){
+            $data['note']['fr']['note'] =  null;
+            $data['note']['fr']['condition'] =  null;
+        }
 
 
         $imageSearchModel = new HotelImageSearch();
