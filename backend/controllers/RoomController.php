@@ -131,6 +131,25 @@ class RoomController extends Controller
         $data['note']['ru'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'ru'])->one();
         $data['note']['fr'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'fr'])->one();
 
+
+
+        if($data['note']['ru'] == null){
+            $data['note']['ru'] =  new RoomNote();
+            $data['note']['ru']['room_type_id']= $id;
+            $data['note']['ru']['lang']= 'ru';
+            $data['note']['ru']['note']= null;
+        }
+
+        if($data['note']['fr'] == null){
+            $data['note']['fr'] =  new RoomNote();
+            $data['note']['fr']['room_type_id']= $id;
+            $data['note']['fr']['lang']= 'fr';
+            $data['note']['fr']['note']= null;
+
+        }
+
+
+
         $imageSearchModel = new RoomImageSearch();
         $imageSearchModel->room_id = $id;
         $imageDataProvider = $imageSearchModel->search($this->request->queryParams);
