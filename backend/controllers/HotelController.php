@@ -205,11 +205,18 @@ class HotelController extends Controller
                 $data['note']['fr']['condition'] = $post['condition_fr'];
                 $data['note']['ru']['note'] = $post['note_ru'];
                 $data['note']['fr']['note'] = $post['note_fr'];
-                if ($data['note']['fr']->save()
-                    && $data['note']['ru']->save()
-                    && $model->save()) {
+
+                if(!empty($data['note']['ru']['note']) || !empty($data['note']['ru']['condition']))
+                    $data['note']['ru']->save();
+
+                if(!empty($data['note']['fr']['note']) || !empty($data['note']['fr']['condition']))
+                    $data['note']['fr']->save();
+
+
+                if($model->save())
                     return $this->redirect(['view', 'id' => $model->id]);
-                }
+
+
             }
         }
 

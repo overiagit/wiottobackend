@@ -163,11 +163,21 @@ class RoomController extends Controller
 
             $data['note']['ru']['note'] = $post['note_ru'];
             $data['note']['fr']['note'] = $post['note_fr'];
-            if($model->load($post) && $data['note']['fr']->save()
-                && $data['note']['ru']->save() && $model->save()) {
 
-                return $this->redirect(['view', 'id' => $model->id]);
+            if($model->load($post)){
+                if(!empty($data['note']['ru']['note']))
+                    $data['note']['ru']->save();
+
+                if(!empty($data['note']['fr']['note']))
+                    $data['note']['fr']->save();
+
+
+                 if($model->save())
+                     return $this->redirect(['view', 'id' => $model->id]);
+
             }
+
+
         }
 
         return $this->render('update', [
