@@ -72,6 +72,19 @@ $this->params['breadcrumbs'][] = $this->title;
 //                'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
 //                    ['class' => 'form-control', 'prompt' => 'Все']),
             ],
+               'images_count',
+
+//            [
+//                'attribute' => 'images_count',
+//                'contentOptions' => ['style' => 'width:100px','class' => 'text-wrap'],
+//                'value' => function ($model, $key, $index, $column) {
+//                   return   $model->getImageCount();
+//
+//                },
+//
+//                'filter' => Html::activeInput('text',$searchModel,'images_count',
+//                    ['class' => 'form-control', 'prompt' => 'Все']),
+//            ],
 
             [
                 'attribute' => 'note_ru',

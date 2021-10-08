@@ -14,6 +14,7 @@ class RoomSearch extends Room
 
     public  $uni_room_type_ids;
     public  $image_ids;
+    public  $images_count;
     public  $note_ru;
     public  $note_fr;
     public  $hotel_name;
@@ -23,7 +24,7 @@ class RoomSearch extends Room
     public function rules()
     {
         return [
-            [['id', 'rooms', 'exbeds', 'hotel_id', 'active', 'uni_room_type_id'], 'integer'],
+            [['id', 'rooms', 'exbeds', 'hotel_id', 'active', 'uni_room_type_id','images_count'], 'integer'],
             [['name', 'villa', 'note', 'hotel_name'], 'safe'],
         ];
     }
@@ -65,10 +66,13 @@ class RoomSearch extends Room
         $query->select(['t_room_type.id','t_room_type.name'
             ,'t_room_type.villa','t_room_type.rooms','t_room_type.exbeds','t_room_type.note'
             ,'ifnull(t_room_type.hotel_id, 0) as hotel_id', 't_hotel.name as hotel_name','t_room_type.active'
-            , "ifnull(group_concat(t_uni_room_type.id), 'no') as uni_room_type_ids"]);
+            , "ifnull(group_concat(t_uni_room_type.id), 'no') as uni_room_type_ids"
+            , "count(distinct wiotto_uni_db.fe_RoomsImages.id) as images_count"
+        ]);
 
         $query->innerJoin('t_hotel', 't_room_type.hotel_id = t_hotel.id' );
         $query->leftJoin('t_uni_room_type', 't_room_type.id = t_uni_room_type.room_type_id' );
+        $query->leftJoin('wiotto_uni_db.fe_RoomsImages', 't_room_type.id = fe_RoomsImages.room_id' );
 
         $query->groupBy(['t_room_type.id','t_room_type.name'
             ,'t_room_type.villa','t_room_type.rooms','t_room_type.exbeds','t_room_type.note'
@@ -88,6 +92,8 @@ class RoomSearch extends Room
             ->andFilterWhere(['like', 't_room_type.villa', $this->villa])
             ->andFilterWhere(['like', 't_hotel.name', $this->hotel_name])
             ->andFilterWhere(['like', 't_room_type.note', $this->note]);
+
+        $query->andFilterHaving(["count(distinct wiotto_uni_db.fe_RoomsImages.id)" => $this->images_count]);
 
         return $dataProvider;
     }

@@ -162,6 +162,16 @@ class Room extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets img count .
+     *
+     * @return int
+     */
+    public function getImageCount()
+    {
+        return $this->getImages()->count();
+    }
+
+    /**
      * Gets ids .
      *
      * @return \yii\db\ActiveQuery
