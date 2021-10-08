@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
 //                    ['class' => 'form-control', 'prompt' => 'Все']),
             ],
-               'images_count',
+//               'images_count',
 
 //            [
 //                'attribute' => 'images_count',
