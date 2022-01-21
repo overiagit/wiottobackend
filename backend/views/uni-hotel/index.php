@@ -37,7 +37,15 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    ['class' => 'form-control', 'prompt' => 'Все']),
             ],
 //            'ResortId',
-//            'CountryId',
+            'CountryId',
+            [
+                'attribute' => 'Country',
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getCountryName();
+                },
+                'format' =>'raw',
+
+           ],
             'hotel_id',
 //            'wiotto_hotel_name',
 //            [

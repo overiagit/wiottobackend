@@ -70,16 +70,22 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group row">
         <div class="col-6 col-md-3">
-    <?= $form->field($model, 'Longitude')->textInput(['type'=>'number','maxlength' => true,'readonly'=>true]) ?>
+    <?= $form->field($model, 'Longitude')->textInput(['type'=>'number']) ?>
         </div>
             <div class="col-6 col-md-3">
-    <?= $form->field($model, 'Latitude')->textInput(['type'=>'number','maxlength' => true,'readonly'=>true]) ?>
+    <?= $form->field($model, 'Latitude')->textInput(['type'=>'number']) ?>
             </div>
         <div class="col-6 col-md-3">
     <?= $form->field($model, 'date_add')->textInput(['readonly'=>true]) ?>
 
         </div>
     </div>
+    <div class="form-group row">
+        <div class="col-12 col-md-6">
+            <?= $form->field($model, 'location_id')->textInput(['type'=>'number','maxlength' => true]) ?>
+        </div>
+    </div>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

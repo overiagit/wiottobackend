@@ -13,10 +13,12 @@ use Yii;
  * @property int|null $ResortId
  * @property int|null $CountryId
  * @property int|null $hotel_id
- * @property string|null $Longitude
- * @property string|null $Latitude
+ * @property number|null $Longitude
+ * @property number|null $Latitude
  * @property string|null $date_add
- *  @property string|null $wiotto_hotel_name
+ * @property string|null $wiotto_hotel_name
+ * @property  number|null $location_id
+
  *
  * @property Hotel $hotel
  */
@@ -49,10 +51,11 @@ class UniHotel extends \yii\db\ActiveRecord
     {
         return [
             [['id'], 'required'],
-            [['id', 'starId', 'ResortId', 'CountryId', 'hotel_id'], 'integer'],
+            [['id', 'starId', 'ResortId', 'CountryId', 'hotel_id', 'location_id'], 'integer'],
+            [['location_id','Longitude', 'Latitude'], 'number'],
             [['date_add'], 'safe'],
             [['title'], 'string', 'max' => 255],
-            [['Longitude', 'Latitude'], 'string', 'max' => 45],
+//            [['Longitude', 'Latitude'], 'string', 'max' => 45],
             [['id'], 'unique'],
             [['hotel_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hotel::className(), 'targetAttribute' => ['hotel_id' => 'id']],
         ];
@@ -74,6 +77,7 @@ class UniHotel extends \yii\db\ActiveRecord
             'Latitude' => 'Latitude',
             'date_add' => 'Date Add',
             'wiotto_hotel_name' => 'wiotto_hotel_name',
+            'location_id' => 'location_id',
         ];
     }
 
@@ -126,6 +130,16 @@ class UniHotel extends \yii\db\ActiveRecord
         ])->execute();
 
          return true;
+    }
+
+    public function updateLocation()
+    {
+        Yii::$app->db1->createCommand('update t_uni_hotel set location_id = :location_id
+           where hotel_uni_id = :hotel_uni_id', [
+            ':location_id' => $this->location_id, ':hotel_uni_id' => $this->id,
+        ])->execute();
+
+        return true;
     }
 
     public function getResort()
