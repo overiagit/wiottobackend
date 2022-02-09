@@ -1,11 +1,13 @@
   <?php
 
-use yii\helpers\Html;
+  use kartik\select2\Select2;
+  use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Hotel */
 /* @var $data array */
+  /* @var $features array*/
 /* @var $form yii\widgets\ActiveForm */
  /* @var $imageSearchModel backend\models\HotelImageSearch */
  /* @var $imageDataProvider yii\data\ActiveDataProvider */
@@ -103,6 +105,22 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'longitude')->textInput(['type'=>'number','max' => "360", 'min'=>'0' , 'step' => '0.000001']) ?>
 
         </div>
+    </div>
+
+    <div class="form-group row">
+        <?= $form->field($model, 'features'
+        )->widget(Select2::classname(), [
+            'data' =>$data['feature_list'], //\yii\helpers\ArrayHelper::map($data['feature_list'], 'id', 'value'),
+            'options' => ['placeholder' => Yii::t('app', 'Feature')  ,'allowClear' => true, 'id'=>'cbFeature', 'multiple' => true,
+                'class' => "form-control select2-show-search  border-bottom-0",
+            ],
+            'pluginOptions' => [
+                           'allowClear' => true,
+                'width' => '100%',
+
+                           'theme'=>'material',
+            ],
+        ])->label(false) ?>
     </div>
 
     <div class="form-group row">

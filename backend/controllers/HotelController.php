@@ -2,7 +2,9 @@
 
 namespace backend\controllers;
 
+use backend\models\Feature;
 use backend\models\Hotel;
+use backend\models\HotelFeature;
 use backend\models\HotelImageSearch;
 use backend\models\HotelSearch;
 use backend\models\HotelType;
@@ -88,7 +90,7 @@ class HotelController extends Controller
         $data['note']['ru']['condition'] = "";
         $data['note']['fr']['condition'] = "";
 
-
+      //  $model->features = HotelFeature::getByHotel($id);// ['1','2','3'];// $model->getFeatures();
 
         $imageSearchModel = new HotelImageSearch();
         $imageSearchModel->hotel_id = -9999;
@@ -162,6 +164,7 @@ class HotelController extends Controller
             'data'=>$data,
             'imageSearchModel' => $imageSearchModel,
             'imageDataProvider' => $imageDataProvider,
+//            'features' => $features,
         ]);
     }
 
@@ -179,6 +182,11 @@ class HotelController extends Controller
         $data['town'] = Town::getList();
         $data['island'] = Island::getList();
         $data['town_region'] = TownRegion::getList();
+        $data['feature_list'] = Feature::getList();
+       // $data['features'] = null;//HotelFeature::getByHotel($id);
+
+       // HotelFeature::getByHotel($id);//
+        $model->features = HotelFeature::getByHotel($id);// ['1','2','3'];// $model->getFeatures();
 
          $data['note']['en'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'en'])->one();
          $data['note']['ru'] = HotelNote::find()->where(['hotel_id' => $id,'lang'=>'ru'])->one();
@@ -239,6 +247,10 @@ class HotelController extends Controller
 
                 if(!empty($data['note']['fr']['note']) || !empty($data['note']['fr']['condition']))
                     $data['note']['fr']->save();
+
+
+               // if(!empty($post['Hotel']['features']))
+                    $model->saveFeatures($post['Hotel']['features']);
 
 
                 if($model->save())

@@ -23,10 +23,15 @@ use yii\helpers\ArrayHelper;
  * @property string|null $condition
  *
  * @property UniHotel[] $UniHotels
-// * @property UniRoomType[] $UniRoomType
+ * @property array $features
  */
+
+
+
 class Hotel extends \yii\db\ActiveRecord
 {
+
+    public $features;
     /**
      * {@inheritdoc}
      */
@@ -108,6 +113,12 @@ class Hotel extends \yii\db\ActiveRecord
 //        return $this->hasMany(UniRoomType::className(), ['hotel_id' => 'id']);
     }
 
+    public function getFeatures(){
+      //  return HotelFeature::getByHotel($this->id);
+        return $this->hasMany(Feature::className(), ['id' => 'id'])->viaTable('t_hotel_option', ['hotel_id' => 'id']);
+
+    }
+
 
     public static function getList()
     {
@@ -131,5 +142,20 @@ class Hotel extends \yii\db\ActiveRecord
     public static function getLastId(){
         return  self::find()->max('id');
     }
+
+    public function saveFeatures(array $features){
+
+        $sql = sprintf("delete from wiotto_db.t_hotel_option where hotel_id = %d",$this->id);
+        $cmd = self::getDb()->createCommand($sql);
+        $cmd->execute();
+
+        foreach($features as $key=>$val){
+            $sql = sprintf("insert into wiotto_db.t_hotel_option(hotel_id, option_id) values(%d, %d)",$this->id , $val );
+            $cmd = self::getDb()->createCommand($sql);
+            $cmd->execute();
+        }
+    }
+
+
 
 }

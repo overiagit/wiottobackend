@@ -21,7 +21,8 @@
         "froala/yii2-froala-editor": "dev-master",
         "de-luxis/yii2-simple-filemanager": "dev-master",
         "hail812/yii2-adminlte3": "dev-master",
-        "pendalf89/yii2-filemanager": "*"
+        "pendalf89/yii2-filemanager": "*",
+        "kartik-v/yii2-widget-select2": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -38,6 +39,9 @@
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "repositories": [
