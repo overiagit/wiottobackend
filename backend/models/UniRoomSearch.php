@@ -56,7 +56,8 @@ class UniRoomSearch extends UniRoom
             ,'t_uni_room_type.hotel_uni_id as hotel_uni_id'
             ,'t_uni_hotel.title as uni_hotel'
             ,'t_uni_room_type.hotel_id as hotel_id','t_uni_room_type.description as description'
-            ,'t_uni_room_type.date_add as date_add','t_room_type.name as wiotto_name']);
+            ,'t_uni_room_type.date_add as date_add','t_room_type.name as wiotto_name'
+            ,'t_uni_room_type.maxpax as maxpax','t_uni_room_type.parent as parent']);
         $query->innerJoin('t_uni_hotel', 't_uni_hotel.id = t_uni_room_type.hotel_uni_id' );
         $query->leftJoin('t_room_type', 't_room_type.id = t_uni_room_type.room_type_id' );
 

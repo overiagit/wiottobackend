@@ -14,6 +14,8 @@ use Yii;
  * @property int|null $hotel_id
  * @property string|null $description
  * @property string|null $date_add
+ * @property string|null $maxpax
+ * @property string|null $parent
  */
 class UniRoom extends \yii\db\ActiveRecord
 {
@@ -42,7 +44,7 @@ class UniRoom extends \yii\db\ActiveRecord
             [['id'], 'required'],
             [['id', 'room_type_id', 'hotel_uni_id', 'hotel_id'], 'integer'],
             [['date_add'], 'safe'],
-            [['title', 'description'], 'string', 'max' => 255],
+            [['title', 'description','maxpax','parent'], 'string', 'max' => 255],
             [['id'], 'unique'],
         ];
     }
@@ -60,6 +62,8 @@ class UniRoom extends \yii\db\ActiveRecord
             'hotel_id' => 'Hotel ID',
             'description' => 'Description',
             'date_add' => 'Date Add',
+            'maxpax'=> 'Max Pax',
+            'parent'=>'Parent',
         ];
     }
 

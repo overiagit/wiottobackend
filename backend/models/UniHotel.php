@@ -19,6 +19,7 @@ use Yii;
  * @property string|null $wiotto_hotel_name
  * @property  number|null $location_id
 
+
  *
  * @property Hotel $hotel
  */
@@ -78,6 +79,7 @@ class UniHotel extends \yii\db\ActiveRecord
             'date_add' => 'Date Add',
             'wiotto_hotel_name' => 'wiotto_hotel_name',
             'location_id' => 'location_id',
+
         ];
     }
 
