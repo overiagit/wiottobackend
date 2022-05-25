@@ -76,7 +76,8 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group row">
         <div class="col col-md-10">
-            <?= $form->field($model, 'note')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
+<!--            --><?//= $form->field($model, 'note_en')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
+            <?= Html::textarea('note_en', $data['note']['en']['note'],['id'=>'txt_note_en','class'=>'form-control', 'rows'=>6]) ?>
         </div>
         <div class="col col-md-2 align-content-center">
             <?=Html::button('EN',['id'=>'btn_note_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>

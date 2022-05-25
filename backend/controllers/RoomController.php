@@ -128,6 +128,7 @@ class RoomController extends Controller
         $data['villa'] =  Villa::getList();
         $data['hotel'] = Hotel::getlist();
 
+        $data['note']['en'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'en'])->one();
         $data['note']['ru'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'ru'])->one();
         $data['note']['fr'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'fr'])->one();
 
@@ -148,6 +149,14 @@ class RoomController extends Controller
 
         }
 
+        if($data['note']['en'] == null){
+            $data['note']['en'] =  new RoomNote();
+            $data['note']['en']['room_type_id']= $id;
+            $data['note']['en']['lang']= 'en';
+            $data['note']['en']['note']= null;
+
+        }
+
 
 
         $imageSearchModel = new RoomImageSearch();
@@ -163,6 +172,7 @@ class RoomController extends Controller
 
             $data['note']['ru']['note'] = $post['note_ru'];
             $data['note']['fr']['note'] = $post['note_fr'];
+            $data['note']['en']['note'] = $post['note_en'];
 
             if($model->load($post)){
                 if(!empty($data['note']['ru']['note']))
@@ -170,6 +180,9 @@ class RoomController extends Controller
 
                 if(!empty($data['note']['fr']['note']))
                     $data['note']['fr']->save();
+
+                if(!empty($data['note']['en']['note']))
+                    $data['note']['en']->save();
 
 
                  if($model->save())
