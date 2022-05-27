@@ -98,11 +98,11 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-6 col-md-3">
-    <?= $form->field($model, 'latitude')->textInput(['type'=>'number','max' => '360', 'min'=>'0' , 'step' => '0.000001']) ?>
+    <?= $form->field($model, 'latitude')->textInput(['type'=>'number','max' => '360', 'min'=>'-360' , 'step' => '0.000001']) ?>
 
         </div>
         <div class="col-6 col-md-3">
-    <?= $form->field($model, 'longitude')->textInput(['type'=>'number','max' => "360", 'min'=>'0' , 'step' => '0.000001']) ?>
+    <?= $form->field($model, 'longitude')->textInput(['type'=>'number','max' => "360", 'min'=>'-360' , 'step' => '0.000001']) ?>
 
         </div>
     </div>
