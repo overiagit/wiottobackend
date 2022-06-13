@@ -81,6 +81,7 @@ class HotelController extends Controller
         $data['town'] = Town::getList();
         $data['island'] = Island::getList();
         $data['town_region'] = TownRegion::getList();
+        $data['feature_list'] = Feature::getList();
 
         $data['note']['en']['note'] = "";
         $data['note']['ru']['note'] = "";
