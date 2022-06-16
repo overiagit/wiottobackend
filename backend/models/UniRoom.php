@@ -16,6 +16,7 @@ use Yii;
  * @property string|null $date_add
  * @property string|null $maxpax
  * @property string|null $parent
+// * @property int|null $CountryId
  */
 class UniRoom extends \yii\db\ActiveRecord
 {
@@ -64,6 +65,7 @@ class UniRoom extends \yii\db\ActiveRecord
             'date_add' => 'Date Add',
             'maxpax'=> 'Max Pax',
             'parent'=>'Parent',
+//            'CountryId'=>'CountryId',
         ];
     }
 

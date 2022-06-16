@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             'room_type_id',
@@ -30,34 +29,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model, $key, $index, $column) {
                     return  $model->getRoomName();
                 },
-//                'format' =>'raw',
-//                'filter' => Html::activeDropDownList($searchModel
-//                    , 'wiotto_hotel_name', Hotel::getHotelList(),
-//                    ['class' => 'form-control', 'prompt' => 'Все']),
-//                'filter' => true,
                 'filter' => Html::activeInput('text',$searchModel,'wiotto_name',
                     ['class' => 'form-control', 'prompt' => 'Все']),
             ],
-
+            [
+                'attribute' => 'countryId',
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getUniHotel()->CountryId;
+                },
+                'filter' => Html::activeInput('text',$searchModel,'CountryId',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
             'hotel_uni_id',
             [
                 'attribute' => 'uni_hotel',
                 'value' => function ($model, $key, $index, $column) {
                     return  $model->getUniHotel()->title;
                 },
-//                'format' =>'raw',
-//                'filter' => Html::activeDropDownList($searchModel
-//                    , 'wiotto_hotel_name', Hotel::getHotelList(),
-//                    ['class' => 'form-control', 'prompt' => 'Все']),
-//                'filter' => true,
                 'filter' => Html::activeInput('text',$searchModel,'uni_hotel',
                     ['class' => 'form-control', 'prompt' => 'Все']),
             ],
-            //'description',
-            //'date_add',
+
             'maxpax',
             'parent',
-
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{update}',],
         ],

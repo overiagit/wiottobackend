@@ -43,6 +43,8 @@ class UniRoomController extends Controller
         $searchModel->hotel_uni_id = $id;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+//        print_r($dataProvider);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

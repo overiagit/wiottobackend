@@ -14,6 +14,7 @@ class UniRoomSearch extends UniRoom
 
     public $wiotto_name;
     public $uni_hotel;
+    public $CountryId;
     /**
      * {@inheritdoc}
      */
@@ -21,7 +22,7 @@ class UniRoomSearch extends UniRoom
     {
         return [
             [['id', 'room_type_id', 'hotel_uni_id', 'hotel_id'], 'integer'],
-            [['title', 'description', 'date_add', 'wiotto_name', 'uni_hotel'], 'safe'],
+            [['title', 'description', 'date_add', 'wiotto_name', 'uni_hotel','CountryId'], 'safe'],
         ];
     }
 
@@ -54,10 +55,12 @@ class UniRoomSearch extends UniRoom
         $query->select(['t_uni_room_type.id as id','t_uni_room_type.title as title'
             ,'ifnull(t_uni_room_type.room_type_id,0) as room_type_id'
             ,'t_uni_room_type.hotel_uni_id as hotel_uni_id'
-            ,'t_uni_hotel.title as uni_hotel'
+            ,'t_uni_hotel.title as uni_hotel','t_uni_hotel.CountryId  as CountryId'
             ,'t_uni_room_type.hotel_id as hotel_id','t_uni_room_type.description as description'
             ,'t_uni_room_type.date_add as date_add','t_room_type.name as wiotto_name'
-            ,'t_uni_room_type.maxpax as maxpax','t_uni_room_type.parent as parent']);
+            ,'t_uni_room_type.maxpax as maxpax','t_uni_room_type.parent as parent'
+
+        ]);
         $query->innerJoin('t_uni_hotel', 't_uni_hotel.id = t_uni_room_type.hotel_uni_id' );
         $query->leftJoin('t_room_type', 't_room_type.id = t_uni_room_type.room_type_id' );
 
@@ -76,6 +79,7 @@ class UniRoomSearch extends UniRoom
             'hotel_uni_id' => $this->hotel_uni_id,
             'hotel_id' => $this->hotel_id,
             'date_add' => $this->date_add,
+            'CountryId' => $this->CountryId,
         ]);
 
         $query->andFilterWhere(['like', 't_uni_room_type.title', $this->title])
