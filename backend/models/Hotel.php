@@ -155,7 +155,4 @@ class Hotel extends \yii\db\ActiveRecord
             $cmd->execute();
         }
     }
-
-
-
 }

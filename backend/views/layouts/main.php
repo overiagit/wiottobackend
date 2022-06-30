@@ -43,6 +43,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'FileManager', 'url' => ['/filemanager']];
         $menuItems[] = ['label' => 'Uni-Hotels', 'url' => ['/uni-hotel']];
         $menuItems[] = ['label' => 'Wiotto-Hotels', 'url' => ['/hotel']];
+        $menuItems[] = ['label' => 'Best-For-You', 'url' => ['/best-for-you']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(

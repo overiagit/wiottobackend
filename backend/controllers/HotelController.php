@@ -99,13 +99,7 @@ class HotelController extends Controller
         $imageDataProvider->pagination = ['pageSize' => 1000];
 
 
-//        if ($this->request->isPost) {
-//            if ($model->load($this->request->post()) && $model->save()) {
-//                return $this->redirect(['view', 'id' => $model->id]);
-//            }
-//        } else {
-//            $model->loadDefaultValues();
-//        }
+
 
         if ($this->request->isPost  ) {
             $post = $this->request->post();
@@ -114,12 +108,6 @@ class HotelController extends Controller
                 $model->country_id = 582;
                 if ($model->save()) {
 
-//                    $data['note']['ru']['hotel_id'] = $model->id;
-//                    $data['note']['fr']['hotel_id'] = $model->id;
-//                    $data['note']['ru']['condition'] = $post['condition_ru'];
-//                    $data['note']['fr']['condition'] = $post['condition_fr'];
-//                    $data['note']['ru']['note'] = $post['note_ru'];
-//                    $data['note']['fr']['note'] = $post['note_fr'];
 
 
                     $note_en = new HotelNote();
