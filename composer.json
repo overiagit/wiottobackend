@@ -22,7 +22,8 @@
         "de-luxis/yii2-simple-filemanager": "dev-master",
         "hail812/yii2-adminlte3": "dev-master",
         "pendalf89/yii2-filemanager": "*",
-        "kartik-v/yii2-widget-select2": "*"
+        "kartik-v/yii2-widget-select2": "*",
+        "kartik-v/yii2-widget-fileinput": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

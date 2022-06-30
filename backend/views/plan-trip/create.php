@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\BestForYou */
+/* @var $model backend\models\PlanTrip */
 /* @var $data array */
 /* @var $imageSearchModel backend\models\HotelImageSearch */
 /* @var $imageDataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Create Best for you';
-$this->params['breadcrumbs'][] = ['label' => 'Best for you', 'url' => ['index']];
+$this->title = 'Create Plan your trip';
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="best-for-you-create">
+<div class="plan-trip">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

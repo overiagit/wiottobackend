@@ -11,7 +11,7 @@ use Yii;
  * @property string $lang
  * @property string $note
  *
- * @property FePlanTrip $id0
+ * @property PlanTrip $id0
  */
 class PlanTripLang extends \yii\db\ActiveRecord
 {
@@ -34,7 +34,7 @@ class PlanTripLang extends \yii\db\ActiveRecord
             [['lang'], 'string', 'max' => 2],
             [['note'], 'string', 'max' => 1024],
             [['id', 'lang'], 'unique', 'targetAttribute' => ['id', 'lang']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => FePlanTrip::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => PlanTrip::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
 
@@ -53,11 +53,11 @@ class PlanTripLang extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Id0]].
      *
-     * @return \yii\db\ActiveQuery|FePlanTripQuery
+     * @return \yii\db\ActiveQuery|PlanTripQuery
      */
     public function getId0()
     {
-        return $this->hasOne(FePlanTrip::className(), ['id' => 'id']);
+        return $this->hasOne(PlanTrip::className(), ['id' => 'id']);
     }
 
     /**

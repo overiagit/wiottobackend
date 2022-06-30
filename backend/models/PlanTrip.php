@@ -8,8 +8,13 @@ use Yii;
  * This is the model class for table "fe_plan_trip".
  *
  * @property int $id
- * @property string|null $note
- * @property string|null $link
+ * @property string $note
+ * @property int $country_id
+ * @property string $link
+ * @property int|null $row
+ * @property int $active
+ * @property string $datecreate
+ * @property string $datechange
  *
  * @property FePlanTripLang[] $fePlanTripLangs
  */
@@ -29,11 +34,11 @@ class PlanTrip extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'integer'],
+            [['note', 'link', 'active'], 'required'],
+            [['country_id', 'row', 'active'], 'integer'],
+            [['datecreate', 'datechange'], 'safe'],
             [['note'], 'string', 'max' => 255],
             [['link'], 'string', 'max' => 1024],
-            [['id'], 'unique'],
         ];
     }
 
@@ -45,7 +50,12 @@ class PlanTrip extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'note' => Yii::t('app', 'Note'),
+            'country_id' => Yii::t('app', 'Country ID'),
             'link' => Yii::t('app', 'Link'),
+            'row' => Yii::t('app', 'Row'),
+            'active' => Yii::t('app', 'Active'),
+            'datecreate' => Yii::t('app', 'Datecreate'),
+            'datechange' => Yii::t('app', 'Datechange'),
         ];
     }
 

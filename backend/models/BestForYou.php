@@ -13,6 +13,7 @@ use Yii;
  * @property string $link
  * @property int $country_id
  * @property int $active
+ * @property int $row
  * @property string $dateadd
  * @property string $datechange
  */
@@ -34,7 +35,7 @@ class BestForYou extends \yii\db\ActiveRecord
         return [
             [['note',  'link'], 'required'],
             [['note', 'link'], 'string'],
-            [['country_id', 'active'], 'integer'],
+            [['country_id', 'active', 'row'], 'integer'],
             [['dateadd', 'datechange'], 'safe'],
             [[ 'photo'], 'string', 'max' => 255],
         ];
@@ -52,6 +53,7 @@ class BestForYou extends \yii\db\ActiveRecord
             'link' => Yii::t('app', 'Link'),
             'country_id' => Yii::t('app', 'Country ID'),
             'active' => Yii::t('app', 'Active'),
+            'row' => Yii::t('app', 'Row'),
             'dateadd' => Yii::t('app', 'Dateadd'),
             'datechange' => Yii::t('app', 'Datechange'),
         ];
