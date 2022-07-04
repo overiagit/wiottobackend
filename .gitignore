@@ -42,3 +42,6 @@ phpunit.phar
 /backend/web/index-test.php
 /backend/web/robots.txt
 /tmp
+/backend/web/upload/best_for_you/
+/.___htaccess
+/.htapasswd

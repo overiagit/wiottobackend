@@ -69,12 +69,18 @@ class BestForYou extends \yii\db\ActiveRecord
 //    }
 
       public function getNoteRu(){
-        return  $this->hasOne(BestForyouLang::className()
+        $best = $this->hasOne(BestForyouLang::className()
             , ['id'=>'id' , ])->andWhere(['lang'=>'ru'])->one();
+         if($best)
+             return $best->note;
+         return null;
       }
 
     public function getNoteFr(){
-        return  $this->hasOne(BestForyouLang::className()
+        $best =  $this->hasOne(BestForyouLang::className()
             , ['id'=>'id' , ])->andWhere(['lang'=>'fr'])->one();
+        if($best)
+            return $best->note;
+        return null;
     }
 }

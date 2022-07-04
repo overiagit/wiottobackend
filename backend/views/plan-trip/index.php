@@ -35,14 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'note_ru',
                 'contentOptions' => [ 'style' => 'width: 20%;' ],
                 'value' => function ($model, $key, $index, $column) {
-                    return  $model->getNoteRu()->note;
+                    return  $model->getNoteRu();
                 },
             ],
             [
                 'attribute' => 'note_fr',
                 'contentOptions' => [ 'style' => 'width: 20%;' ],
                 'value' => function ($model, $key, $index, $column) {
-                    return  $model->getNoteFr()->note;
+                    return  $model->getNoteFr();
                 },
             ],
             [

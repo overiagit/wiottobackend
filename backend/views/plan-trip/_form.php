@@ -16,8 +16,6 @@ use yii\widgets\ActiveForm;
   \backend\assets\AppAssetSummerNote::register($this);
 ?>
 
-<!--  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>-->
 
 <div class="best-for-you-form">
 
@@ -34,8 +32,6 @@ use yii\widgets\ActiveForm;
                 </div>
             <div class="form-group row">
                 <div class="col col-md-10">
-<!--                    <label for="txt_note_en">Note EN</label>-->
-<!--                    --><?//= Html::textInput('note_en', $data['note']['en'],['id'=>'txt_note_en','class'=>'form-control']) ?>
                     <?= $form->field($model, 'note')->textInput(['maxlength' => true])->label('Note EN') ?>
                 </div>
             </div>

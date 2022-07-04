@@ -79,12 +79,21 @@ class PlanTrip extends \yii\db\ActiveRecord
     }
 
     public function getNoteRu(){
-        return  $this->hasOne(PlanTripLang::className()
+       $plan =  $this->hasOne(PlanTripLang::className()
             , ['id'=>'id' , ])->andWhere(['lang'=>'ru'])->one();
+
+        if($plan)
+            return $plan->note;
+
+        return null;
     }
 
     public function getNoteFr(){
-        return  $this->hasOne(PlanTripLang::className()
+        $plan =    $this->hasOne(PlanTripLang::className()
             , ['id'=>'id' , ])->andWhere(['lang'=>'fr'])->one();
+        if($plan)
+            return $plan->note;
+
+        return null;
     }
 }
