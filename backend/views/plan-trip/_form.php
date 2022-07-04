@@ -54,7 +54,12 @@ use yii\widgets\ActiveForm;
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col col-md-10 ">
+                    <div class="col-4 col-md-4 ">
+                        <?= $form->field($model, 'col')->textInput(['type'=>'number','max' => '3', 'min'=>'1' , 'step' => '1']) ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6 col-md-6 ">
                     <?= $form->field($model, 'active')->checkbox() ?>
                     </div>
                 </div>
