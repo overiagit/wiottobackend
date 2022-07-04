@@ -24,9 +24,41 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'country_id',
-            'note',
-             'link',
+            [
+                'attribute' => 'note_en',
+                'contentOptions' => [ 'style' => 'width: 20%;' ],
+                'value' => 'note',
+                'filter' => Html::activeInput('text',$searchModel,'note',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
+            [
+                'attribute' => 'note_ru',
+                'contentOptions' => [ 'style' => 'width: 20%;' ],
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getNoteRu()->note;
+                },
+            ],
+            [
+                'attribute' => 'note_fr',
+                'contentOptions' => [ 'style' => 'width: 20%;' ],
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getNoteFr()->note;
+                },
+            ],
+            [
+                'label'=>'Link' ,
+                'header'=>Yii::t('app', 'Link'),
+                'contentOptions' => [ 'style' => 'width: 15%;' ],
+                'attribute'=>'link',
+                'value' => function ($model) {
+                    return Html::a(Html::encode( $model->link),
+                        $model->link, ['target'=>'blank']);
+                },
+                'format' => 'raw',
+                'options'=>['class'=>'success','style'=>'font-weight:bold;'],
+            ],
+              'col',
+               'active',
 
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{update}'

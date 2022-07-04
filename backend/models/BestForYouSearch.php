@@ -14,7 +14,8 @@ class BestForYouSearch extends BestForYou
     /**
      * {@inheritdoc}
      */
-
+    public  $note_ru;
+    public  $note_fr;
 
     /**
      * {@inheritdoc}
@@ -49,11 +50,19 @@ class BestForYouSearch extends BestForYou
         return $dataProvider;
     }
 
+//    $query->leftJoin('fe_best_foryou_lang as lru' , "fe_best_foryou_lang.id=fe_best_for_you.id and lru.lang ='ru' ");
+//    $query->leftJoin('fe_best_foryou_lang as lfr' , "fe_best_foryou_lang.id=fe_best_for_you.id and lfr.lang ='fr' ");
+//
+//    $query->select("fe_best_for_you.id, fe_best_for_you.note, fe_best_for_you.link, fe_best_for_you.row
+//                   fe_best_for_you.active , fe_best_for_you.dateadd
+//                   , fe_best_for_you.datechange , fe_best_for_you.country_id
+//                   , lru.note as note_ru ,  lfr.note as note_fr ");
+
     // grid filtering conditions
     $query->andFilterWhere([
         'id' => $this->id,
         'note' => $this->description,
-        'country_id' => $this->country_id,
+//        'country_id' => $this->country_id,
     ]);
     return $dataProvider;
 }

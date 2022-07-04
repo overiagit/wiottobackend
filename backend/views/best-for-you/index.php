@@ -7,6 +7,7 @@
 /* @var $searchModel backend\models\BestForYouSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+use http\Url;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -24,14 +25,49 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'country_id',
-            'description',
+            [
+                'attribute' => 'note_en',
+                'contentOptions' => [ 'style' => 'width: 15%;' ],
+                'value' => 'note',
+                'filter' => Html::activeInput('text',$searchModel,'note',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
+            [
+                'attribute' => 'note_ru',
+                'contentOptions' => [ 'style' => 'width: 15%;' ],
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getNoteRu()->note;
+                },
+            ],
+            [
+                'attribute' => 'note_fr',
+                'contentOptions' => [ 'style' => 'width: 14%;' ],
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getNoteFr()->note;
+                },
+            ],
+//            'link',
+            [
+                'label'=>'Link' ,
+                'header'=>Yii::t('app', 'Link'),
+                'contentOptions' => [ 'style' => 'width: 15%;' ],
+                'attribute'=>'link',
+                'value' => function ($model) {
+                    return Html::a(Html::encode( $model->link),
+                      $model->link, ['target'=>'blank']);
+                },
+                'format' => 'raw',
+                'options'=>['class'=>'success','style'=>'font-weight:bold;'],
+            ],
+            'row',
+            'active',
             [
                 'attribute' => 'photo',
                 'format' => 'html',
+                'contentOptions' => [ 'style' => 'width: 20%;' ],
                 'value' => function ($data) {
                     return Html::img(Yii::getAlias('@web').'/upload/best_for_you/'. $data['photo']."?".time(),
-                        ['width' => '100px']);
+                        ['width' => '200px']);
                 },
             ],
 
