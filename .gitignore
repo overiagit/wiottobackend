@@ -45,3 +45,4 @@ phpunit.phar
 /backend/web/upload/best_for_you/
 /.___htaccess
 /.htapasswd
+/backend/web/upload/

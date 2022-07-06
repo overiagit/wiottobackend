@@ -50,15 +50,6 @@ class BestForYouController extends Controller
         ]);
 
 
-        /*
-              $searchModel = new HotelSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-         * */
     }
 
     /**
@@ -99,19 +90,10 @@ class BestForYouController extends Controller
                     $ext = end($photo_name);
                     // generate a unique file name to prevent duplicate filenames
                     $model->photo = $model->id.".{$ext}";
-                    // the path to save file, you can set an uploadPath
-                    // in Yii::$app->params (as used in example below)
-                   // Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/status/';
-//                    $path1 = "d:/OpenServer/OpenServer/domains/wiotto.com/frontend/webcontent/images/crm-images/best_for_you";
-
-
-                   // backend/web/upload/best_for_you/2.jpg
-
-//                    $path_tool = Yii::$app->params['best_for_you_photo_tool_path']. $model->photo;
-                    $path_tool = Yii::$app->basePath ."/web/upload/best_for_you/". $model->photo;
+                  $path_tool = Yii::$app->basePath ."/web/upload/best_for_you/". $model->photo;
                     $path_wiotto_com = Yii::$app->params['best_for_you_photo_wiotto_path']. $model->photo;
                     $image->saveAs($path_tool);
-                    $image->saveAs($path_wiotto_com);
+//                    $image->saveAs($path_wiotto_com);
                     $model->save();
                 }
 
@@ -205,7 +187,7 @@ class BestForYouController extends Controller
                         $path_tool = Yii::$app->basePath . "/web/upload/best_for_you/" . $model->photo;
                         $path_wiotto_com = Yii::$app->params['best_for_you_photo_wiotto_path'] . $model->photo;
                         $image->saveAs($path_tool);
-                        $image->saveAs($path_wiotto_com);
+//                        $image->saveAs($path_wiotto_com);
                         $model->save();
                     }
                     $data['ru']['note'] = trim($post['note_ru']);
@@ -238,7 +220,20 @@ class BestForYouController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $item =  $this->findModel($id);
+        if($item) {
+
+            $path_tool = Yii::$app->basePath ."/web/upload/best_for_you/". $item->photo;
+            $path_wiotto_com = Yii::$app->params['best_for_you_photo_wiotto_path']. $item->photo;
+            if(file_exists($path_tool))
+                 unlink($path_tool);
+
+//            if(file_exists($path_wiotto_com))
+//            unlink($path_wiotto_com);
+
+
+            $item->delete();
+        }
         return $this->redirect(['index']);
     }
 
