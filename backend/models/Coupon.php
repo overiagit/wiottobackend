@@ -35,6 +35,7 @@ class Coupon extends \yii\db\ActiveRecord
             [['percent', 'active'], 'integer'],
             [['date_from', 'date_to'], 'safe'],
             [['name', 'note'], 'string', 'max' => 255],
+            [['name'], 'unique'],
         ];
     }
 
