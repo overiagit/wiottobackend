@@ -19,7 +19,12 @@ use kartik\widgets\DatePicker;
     </div>
     <div class="form-group row">
         <div class="col col-md-10 ">
-    <?= $form->field($model, 'note')->textarea(['maxlength' => true]) ?>
+            <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10 ">
+            <?= $form->field($model, 'note')->textarea(['maxlength' => true]) ?>
         </div>
     </div>
     <div class="form-group row">

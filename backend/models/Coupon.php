@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string|null $note
+ * @property string|null $description
  * @property int $percent
  * @property string $date_from
  * @property string|null $date_to
@@ -34,7 +35,7 @@ class Coupon extends \yii\db\ActiveRecord
             [['name', 'percent'], 'required'],
             [['percent', 'active'], 'integer'],
             [['date_from', 'date_to'], 'safe'],
-            [['name', 'note'], 'string', 'max' => 255],
+            [['name', 'note','description'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
     }
@@ -48,6 +49,7 @@ class Coupon extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'note' => Yii::t('app', 'Note'),
+            'description' => Yii::t('app', 'Description'),
             'percent' => Yii::t('app', 'Percent'),
             'date_from' => Yii::t('app', 'Date From'),
             'date_to' => Yii::t('app', 'Date To'),

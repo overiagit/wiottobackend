@@ -18,7 +18,7 @@ class CouponSearch extends Coupon
     {
         return [
             [['id', 'percent', 'active'], 'integer'],
-            [['name', 'note', 'date_from', 'date_to'], 'safe'],
+            [['name', 'note', 'date_from', 'date_to','description'], 'safe'],
         ];
     }
 
@@ -66,6 +66,7 @@ class CouponSearch extends Coupon
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->note])
             ->andFilterWhere(['like', 'note', $this->note]);
 
         return $dataProvider;
