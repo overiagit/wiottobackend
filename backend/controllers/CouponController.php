@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\Coupon;
+use backend\models\CouponLang;
 use backend\models\CouponSearch;
 use Yii;
 use yii\web\Controller;
@@ -69,8 +70,38 @@ class CouponController extends Controller
     {
         $model = new Coupon();
 
+        $data['descrition']['en']['descrition'] = "";
+        $data['descrition']['ru']['descrition'] = "";
+        $data['descrition']['fr']['descrition'] = "";
+
+
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $post = $this->request->post();
+            if ($model->load($post) && $model->save()) {
+
+                $cLang = new CouponLang();
+                $cLang->id = $model->id;
+
+                if($model->description) {
+                    $cLang->lang = 'en';
+                    $cLang->description = $model->description;
+                    $cLang->save();
+                }
+                if($post["description_ru"]) {
+                    $cLang = new CouponLang();
+                    $cLang->id = $model->id;
+                    $cLang->lang = 'ru';
+                    $cLang->description = $post["description_ru"];
+                    $cLang->save();
+                }
+                if($post["description_fr"]) {
+                    $cLang = new CouponLang();
+                    $cLang->id = $model->id;
+                    $cLang->lang = 'fr';
+                    $cLang->description = $post["description_fr"];
+                    $cLang->save();
+                }
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -79,7 +110,7 @@ class CouponController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model,"data"=>$data
         ]);
     }
 
@@ -94,12 +125,74 @@ class CouponController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+//        $descEn =  CouponLang::findOne(["id"=>$id,'lang'=>'en']);
+//        $descFr =   CouponLang::findOne(["id"=>$id,'lang'=>'fr']);
+//        $descRu =  CouponLang::findOne(["id"=>$id,'lang'=>'ru']);
+//
+//        if(!$descEn){
+//            $descEn = new CouponLang();
+//            $descEn->lang = 'en';
+//            $descEn->description = 'en';
+//        }
+//        if(!$descRu){
+//            $descRu = new CouponLang();
+//            $descRu->lang = 'ru';
+//            $descRu->description = 'ru';
+//        }
+//        if(!$descFr){
+//            $descFr = new CouponLang();
+//            $descFr->lang = 'fr';
+//            $descFr->description = 'fr';
+//        }
+
+
+        $data['description']['en'] = CouponLang::findOne(["id"=>$id,'lang'=>'en']);
+        $data['description']['ru'] = CouponLang::findOne(["id"=>$id,'lang'=>'ru']);
+        $data['description']['fr'] = CouponLang::findOne(["id"=>$id,'lang'=>'fr']);
+
+        if($data['description']['en'] == null){
+            $data['description']['en'] =  new CouponLang();
+            $data['description']['en']['id']= $id;
+            $data['description']['en']['lang']= 'en';
+            $data['description']['en']['description']= null;
+        }
+
+        if($data['description']['ru'] == null){
+            $data['description']['ru'] =  new CouponLang();
+            $data['description']['ru']['id']= $id;
+            $data['description']['ru']['lang']= 'ru';
+            $data['description']['ru']['description']= null;
+        }
+        if($data['description']['fr'] == null){
+            $data['description']['fr'] =  new CouponLang();
+            $data['description']['fr']['id']= $id;
+            $data['description']['fr']['lang']= 'fr';
+            $data['description']['fr']['description']= null;
+        }
+
+
+        if ($this->request->isPost) {
+            $post = $this->request->post();
+            if ($model->load($post) && $model->save()) {
+                $data['description']['ru']['description'] = $post['description_ru'];
+                $data['description']['fr']['description'] = $post['description_fr'];
+                $data['description']['en']['description'] = $post['Coupon']['description'];
+
+                if(!empty($data['description']['en']['description']))
+                    $data['description']['en']->save();
+
+                if(!empty($data['description']['ru']['description']))
+                    $data['description']['ru']->save();
+
+                if(!empty($data['description']['fr']['description']))
+                    $data['description']['fr']->save();
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model,"data"=>$data
         ]);
     }
 

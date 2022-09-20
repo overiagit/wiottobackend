@@ -28,10 +28,42 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'options' => ['class' => 'table table-striped table-bordered detail-view fix-width'],
         'attributes' => [
             'id',
             'name',
             'description',
+            [
+                'label'=>'Description EN' ,
+                'attribute'=>'description_en',
+                'value' => function($model){
+                    $lang = \backend\models\CouponLang::findOne(["id"=>$model->id, "lang"=>"en"]);
+                    if($lang)
+                        return $lang->description;
+                    return null;
+                }
+            ],
+            [
+                'label'=>'Description RU' ,
+                'attribute'=>'description_ru',
+                'value' => function($model){
+                   $lang = \backend\models\CouponLang::findOne(["id"=>$model->id, "lang"=>"ru"]);
+                   if($lang)
+                       return $lang->description;
+                   return null;
+                }
+            ],
+            [
+                'label'=>'Description FR' ,
+//                'header'=>'Description_fr',
+                 'attribute'=>'description_fr',
+                'value' => function($model){
+                    $lang = \backend\models\CouponLang::findOne(["id"=>$model->id, "lang"=>"fr"]);
+                    if($lang)
+                        return $lang->description;
+                    return null;
+                }
+            ],
             'note',
             'percent',
 //            'date_from',
