@@ -70,9 +70,9 @@ class CouponController extends Controller
     {
         $model = new Coupon();
 
-        $data['descrition']['en']['descrition'] = "";
-        $data['descrition']['ru']['descrition'] = "";
-        $data['descrition']['fr']['descrition'] = "";
+        $data['description']['en']['description'] = "";
+        $data['description']['ru']['description'] = "";
+        $data['description']['fr']['description'] = "";
 
 
         if ($this->request->isPost) {
