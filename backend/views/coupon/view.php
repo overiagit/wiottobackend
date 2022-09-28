@@ -77,6 +77,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'date_to',
                 'format' => ['date', 'php:Y-m-d']
             ],
+            'price_from',
+            'price_to',
+            'order',
             'active',
         ],
     ]) ?>

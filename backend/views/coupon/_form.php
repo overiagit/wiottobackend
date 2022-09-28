@@ -87,6 +87,17 @@ use kartik\widgets\DatePicker;
         </div>
     </div>
     <div class="form-group row">
+        <div class="col-4 col-md-3 ">
+            <?= $form->field($model, 'price_from')->textInput(['type'=>'number', 'step'=>1]) ?>
+        </div>
+        <div class="col-4 col-md-3 ">
+            <?= $form->field($model, 'price_to')->textInput(['type'=>'number', 'step'=>1]) ?>
+        </div>
+        <div class="col-4 col-md-3 ">
+            <?= $form->field($model, 'order')->textInput(['type'=>'number', 'step'=>1]) ?>
+        </div>
+    </div>
+    <div class="form-group row">
         <div class="col col-md-1 ">
     <?= $form->field($model, 'active')->checkbox() ?>
         </div>

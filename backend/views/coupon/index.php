@@ -24,25 +24,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'name',
             'description',
             'note',
             'percent',
-//            'date_from',
             [
                 'attribute'=>'date_from',
                 'format' => ['date', 'php:Y-m-d']
             ],
-//            'date_to',
             [
                 'attribute'=>'date_to',
                 'format' => ['date', 'php:Y-m-d']
             ],
+            'price_from',
+            'price_to',
+            'order',
             'active',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
