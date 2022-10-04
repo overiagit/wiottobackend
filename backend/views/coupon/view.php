@@ -79,6 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'price_from',
             'price_to',
+            'apply_price_from',
+            'apply_price_to',
             'order',
             'active',
         ],

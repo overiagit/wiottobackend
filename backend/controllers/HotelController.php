@@ -225,10 +225,10 @@ class HotelController extends Controller
                 $data['note']['en']['condition'] = $post['Hotel']['condition'];
                 $data['note']['ru']['note'] = $post['note_ru'];
                 $data['note']['fr']['note'] = $post['note_fr'];
-                $data['note']['en']['note'] = $post['Hotel']['note'];
+                $data['note']['en']['note'] = trim($post['Hotel']['note']) != "";
 
 
-                if(!empty($data['note']['en']['note']) || !empty($data['note']['en']['condition']))
+                if((!empty($data['note']['en']['note']) && $data['note']['en']['note'] !='') || !empty($data['note']['en']['condition']))
                     $data['note']['en']->save();
 
                 if(!empty($data['note']['ru']['note']) || !empty($data['note']['ru']['condition']))

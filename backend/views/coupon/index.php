@@ -37,9 +37,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'date_to',
                 'format' => ['date', 'php:Y-m-d']
             ],
-            'price_from',
-            'price_to',
-            'order',
+//            'price_from',
+//            'price_to',
+//            'apply_price_from',
+//            'apply_price_to',
+//            'order',
+            [
+                'attribute' => 'price_from',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line; ' ],
+//                'noWrap' => false,
+//                'mergeHeader'=>true,
+            ],
+            [
+                'attribute' => 'price_to',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
+            [
+                'attribute' => 'apply_price_from',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
+            [
+                'attribute' => 'apply_price_to',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
             'active',
             ['class' => 'yii\grid\ActionColumn'],
         ],

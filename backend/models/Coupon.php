@@ -16,6 +16,8 @@ use Yii;
  * @property string|null $date_to
  * @property int|null $price_from
  * @property int|null $price_to
+ * @property int|null $apply_price_from
+ * @property int|null $apply_price_to
  * @property int|null $order
  * @property int $active
  */
@@ -37,7 +39,8 @@ class Coupon extends \yii\db\ActiveRecord
         return [
             [['name', 'percent'], 'required'],
             [['percent', 'active'], 'integer'],
-            [['date_from', 'date_to', 'price_from','price_to','order'], 'safe'],
+            [['date_from', 'date_to', 'price_from','price_to','order'
+                ,'apply_price_from','apply_price_to',], 'safe'],
             [['name', 'note','description'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
@@ -56,8 +59,10 @@ class Coupon extends \yii\db\ActiveRecord
             'percent' => Yii::t('app', 'Percent'),
             'date_from' => Yii::t('app', 'Date From'),
             'date_to' => Yii::t('app', 'Date To'),
-            'price_from' => Yii::t('app', 'Price From'),
-            'price_to' => Yii::t('app', 'Price To'),
+            'price_from' => Yii::t('app', 'Show PopUp Price From'),
+            'price_to' => Yii::t('app', 'Show PopUp Price To'),
+            'apply_price_from' => Yii::t('app', 'Apply Price From'),
+            'apply_price_to' => Yii::t('app', 'Apply Price To'),
             'order' => Yii::t('app', 'Order'),
             'active' => Yii::t('app', 'Active'),
         ];

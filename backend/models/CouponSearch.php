@@ -18,7 +18,8 @@ class CouponSearch extends Coupon
     {
         return [
             [['id', 'percent', 'active'], 'integer'],
-            [['name', 'note', 'date_from', 'date_to','description', 'price_from', 'price_to','order'], 'safe'],
+            [['name', 'note', 'date_from', 'date_to','description'
+                , 'price_from', 'price_to', 'apply_price_from', 'apply_price_to','order'], 'safe'],
         ];
     }
 
@@ -66,6 +67,8 @@ class CouponSearch extends Coupon
             'order' => $this->order,
             'price_from' => $this->price_from,
             'price_to' => $this->price_to,
+            'apply_price_from' => $this->apply_price_from,
+            'apply_price_to' => $this->apply_price_to,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
