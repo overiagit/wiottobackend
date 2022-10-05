@@ -93,9 +93,7 @@ use kartik\widgets\DatePicker;
         <div class="col-4 col-md-3 ">
             <?= $form->field($model, 'price_to')->textInput(['type'=>'number', 'step'=>1]) ?>
         </div>
-<!--        <div class="col-4 col-md-3 ">-->
-<!--            --><?//= $form->field($model, 'order')->textInput(['type'=>'number', 'step'=>1]) ?>
-<!--        </div>-->
+
     </div>
     <div class="form-group row">
         <div class="col-4 col-md-3 ">
