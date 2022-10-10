@@ -52,7 +52,7 @@ class UniRoomSearch extends UniRoom
             'query' => $query,
         ]);
 
-        $query->select(['t_uni_room_type.id as id','t_uni_room_type.title as title'
+        $query->select(['t_uni_room_type.id ','t_uni_room_type.title '
             ,'ifnull(t_uni_room_type.room_type_id,0) as room_type_id'
             ,'t_uni_room_type.hotel_uni_id as hotel_uni_id'
             ,'t_uni_hotel.title as uni_hotel','t_uni_hotel.CountryId  as CountryId'
@@ -74,12 +74,12 @@ class UniRoomSearch extends UniRoom
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            't_uni_room_type.id' => $this->id,
             'ifnull(t_uni_room_type.room_type_id,0)' => $this->room_type_id,
-            'hotel_uni_id' => $this->hotel_uni_id,
-            'hotel_id' => $this->hotel_id,
-            'date_add' => $this->date_add,
-            'CountryId' => $this->CountryId,
+            't_uni_room_type.hotel_uni_id' => $this->hotel_uni_id,
+            't_uni_room_type.hotel_id' => $this->hotel_id,
+            't_uni_room_type.date_add' => $this->date_add,
+            't_uni_hotel.CountryId' => $this->CountryId,
         ]);
 
         $query->andFilterWhere(['like', 't_uni_room_type.title', $this->title])
