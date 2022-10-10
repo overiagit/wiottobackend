@@ -52,7 +52,7 @@ class UniRoomSearch extends UniRoom
             'query' => $query,
         ]);
 
-        $query->select(['t_uni_room_type.id ','t_uni_room_type.title '
+        $query->select(['t_uni_room_type.id as id','t_uni_room_type.title as title'
             ,'ifnull(t_uni_room_type.room_type_id,0) as room_type_id'
             ,'t_uni_room_type.hotel_uni_id as hotel_uni_id'
             ,'t_uni_hotel.title as uni_hotel','t_uni_hotel.CountryId  as CountryId'
