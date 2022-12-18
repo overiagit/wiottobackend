@@ -26,7 +26,7 @@ class RoomSearch extends Room
     {
         return [
             [['id', 'rooms', 'exbeds', 'hotel_id', 'active', 'uni_room_type_id','images_count'], 'integer'],
-            [['name', 'villa', 'note', 'hotel_name', "images"], 'safe'],
+            [['name', 'villa', 'note', 'hotel_name', "images","uni_room_type_ids"], 'safe'],
         ];
     }
 
@@ -93,7 +93,9 @@ class RoomSearch extends Room
             ->andFilterWhere(['like', 't_room_type.villa', $this->villa])
             ->andFilterWhere(['like', 't_hotel.name', $this->hotel_name])
             ->andFilterWhere(['like', 't_room_type.note', $this->note]);
-         $query->andFilterHaving(['like' , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_RoomsImages.id),"no")', $this->images]);
+         $query->andFilterHaving(['like' , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_RoomsImages.id),"no")', $this->images])
+             ->andFilterHaving(['like' ,"ifnull(group_concat(t_uni_room_type.id), 'no')", $this->uni_room_type_ids])
+         ;
 
 //        $query->andFilterHaving(["count(distinct wiotto_uni_db.fe_RoomsImages.id)" => $this->images_count]);
 

@@ -55,8 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return  $model->getUniRoomIds();
                 },
 
-                'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
-                    ['class' => 'form-control', 'prompt' => 'Все']),
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+
+
+//                'filter' => Html::activeInput('text',$searchModel,'uni_room_type_ids',
+//                    ['class' => 'form-control', 'prompt' => 'Все']),
             ],
 
             [

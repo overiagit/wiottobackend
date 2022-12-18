@@ -138,7 +138,9 @@ class Room extends \yii\db\ActiveRecord
      */
     public function getUniRoomIds()
     {
-        return $this->getUniRooms()->select(['group_concat(id) as ids'])->scalar();
+        $ids = $this->getUniRooms()->select(["ifnull(group_concat(id),'no') as ids"])->scalar();
+
+        return substr($ids,0,10).' ...';
     }
 
     /**

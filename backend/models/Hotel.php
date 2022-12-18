@@ -128,7 +128,7 @@ class Hotel extends \yii\db\ActiveRecord
     public function getImagesIds(){
         $ids = $this->hasMany(HotelImage::className()
             , ['hotel_id' => 'id'])
-            ->select("GROUP_CONCAT(id)")->column()[0]??'no';
+            ->select("GROUP_CONCAT(id)")->scalar()??'no';
 
         return substr($ids,0,10).' ...';
     }
