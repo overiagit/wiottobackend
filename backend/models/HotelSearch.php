@@ -14,11 +14,14 @@ class HotelSearch extends Hotel
     /**
      * {@inheritdoc}
      */
+
+    public  $images;
+
     public function rules()
     {
         return [
             [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id'], 'integer'],
-            [['name', 'comment', 'note', 'condition'], 'safe'],
+            [['name', 'comment', 'note', 'condition' , 'images'], 'safe'],
             [['latitude', 'longitude'], 'number'],
         ];
     }
@@ -45,11 +48,29 @@ class HotelSearch extends Hotel
 
         // add conditions that should always apply here
 
+        $query->leftJoin('wiotto_uni_db.fe_HotelsImages'
+            , 't_hotel.id = wiotto_uni_db.fe_HotelsImages.hotel_id' );
+
+
+        $query->select(['t_hotel.id','t_hotel.type_id'
+            ,'t_hotel.town_id','t_hotel.town_region_id','t_hotel.location_id','t_hotel.country_id'
+            ,'t_hotel.island_id','t_hotel.name','t_hotel.note','t_hotel.condition'
+            ,'t_hotel.latitude','t_hotel.longitude'
+            , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_HotelsImages.id),"no") as images'
+        ]);
+
+        $query->groupBy(['t_hotel.id','t_hotel.type_id'
+            ,'t_hotel.town_id','t_hotel.town_region_id','t_hotel.location_id','t_hotel.country_id'
+            ,'t_hotel.island_id','t_hotel.name','t_hotel.note','t_hotel.condition'
+            ,'t_hotel.latitude','t_hotel.longitude']);
+
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $this->load($params);
+
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -73,8 +94,10 @@ class HotelSearch extends Hotel
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'comment', $this->comment])
             ->andFilterWhere(['like', 'note', $this->note])
-            ->andFilterWhere(['like', 'condition', $this->condition]);
-
+            ->andFilterWhere(['like', 'condition', $this->condition])
+//            ->andFilterWhere(['like', 'images', $this->images])
+        ;
+        $query->andFilterHaving(['like' , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_HotelsImages.id),"no")', $this->images]);
         return $dataProvider;
     }
 }

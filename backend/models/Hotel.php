@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
  * @property int $country_id
  * @property int|null $island_id
  * @property string|null $condition
- *
+// * @property string|null $images
  * @property UniHotel[] $UniHotels
  * @property array $features
  */
@@ -82,6 +82,7 @@ class Hotel extends \yii\db\ActiveRecord
             'country_id' => 'Country ID',
             'island_id' => 'Island ID',
             'condition' => 'Condition',
+//            'images' => 'Images'
         ];
     }
 
@@ -116,9 +117,21 @@ class Hotel extends \yii\db\ActiveRecord
     public function getFeatures(){
       //  return HotelFeature::getByHotel($this->id);
         return $this->hasMany(Feature::className(), ['id' => 'id'])->viaTable('t_hotel_option', ['hotel_id' => 'id']);
-
     }
 
+//    public function getImages(){
+//        return $this->hasMany(HotelImage::className(), ['id' => 'id'])->viaTable('wiotto_uni_db.fe_HotelsImages', ['hotel_id' => 'id']);
+////     return "eeeemy_images";
+//
+//    }
+
+    public function getImagesIds(){
+        $ids = $this->hasMany(HotelImage::className()
+            , ['hotel_id' => 'id'])
+            ->select("GROUP_CONCAT(id)")->column()[0]??'no';
+
+        return substr($ids,0,10).' ...';
+    }
 
     public static function getList()
     {
@@ -131,6 +144,7 @@ class Hotel extends \yii\db\ActiveRecord
             ->innerJoin('t_hotel_type', 't_hotel.type_id = t_hotel_type.id')
             ->leftJoin('t_town_region', 't_hotel.town_region_id = t_town_region.id')
             ->leftJoin('t_island', 't_hotel.island_id = t_island.id')
+//            ->leftJoin('fe_HotelsImages', 't_hotel.id = t_island.id')
             ->select(["`t_hotel`.`id` as `id`"
                 , "concat(`t_hotel`.`name`,' ', `t_hotel_type`.`name` 
                  , ifnull( concat(' region:' ,`t_town_region`.`name` ),'') 
@@ -154,5 +168,15 @@ class Hotel extends \yii\db\ActiveRecord
             $cmd = self::getDb()->createCommand($sql);
             $cmd->execute();
         }
+    }
+
+    /**
+     * Gets ids .
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(HotelImage::className(), ['hotel_id' => 'id']);
     }
 }

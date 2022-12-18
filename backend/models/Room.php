@@ -158,7 +158,7 @@ class Room extends \yii\db\ActiveRecord
      */
     public function getImageIds()
     {
-        return $this->getImages()->select(["group_concat( id, ', ') as ids"])->scalar();
+        return $this->getImages()->select(["group_concat(id) as ids"])->scalar()??'no';
     }
 
     /**

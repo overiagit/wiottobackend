@@ -22,7 +22,7 @@ class HotelImage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'fe_HotelsImages';
+        return 'wiotto_uni_db.fe_HotelsImages';
     }
 
     /**

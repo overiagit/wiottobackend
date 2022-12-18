@@ -18,6 +18,7 @@ class RoomSearch extends Room
     public  $note_ru;
     public  $note_fr;
     public  $hotel_name;
+    public  $images;
     /**
      * {@inheritdoc}
      */
@@ -25,7 +26,7 @@ class RoomSearch extends Room
     {
         return [
             [['id', 'rooms', 'exbeds', 'hotel_id', 'active', 'uni_room_type_id','images_count'], 'integer'],
-            [['name', 'villa', 'note', 'hotel_name'], 'safe'],
+            [['name', 'villa', 'note', 'hotel_name', "images"], 'safe'],
         ];
     }
 
@@ -67,12 +68,12 @@ class RoomSearch extends Room
             ,'t_room_type.villa','t_room_type.rooms','t_room_type.exbeds','t_room_type.note'
             ,'ifnull(t_room_type.hotel_id, 0) as hotel_id', 't_hotel.name as hotel_name','t_room_type.active'
             , "ifnull(group_concat(t_uni_room_type.id), 'no') as uni_room_type_ids"
-//            , "count(distinct wiotto_uni_db.fe_RoomsImages.id) as images_count"
+            , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_RoomsImages.id),"no") as images'
         ]);
 
         $query->innerJoin('t_hotel', 't_room_type.hotel_id = t_hotel.id' );
         $query->leftJoin('t_uni_room_type', 't_room_type.id = t_uni_room_type.room_type_id' );
-//        $query->leftJoin('wiotto_uni_db.fe_RoomsImages', 't_room_type.id = fe_RoomsImages.room_id' );
+        $query->leftJoin('wiotto_uni_db.fe_RoomsImages', 't_room_type.id = fe_RoomsImages.room_id' );
 
         $query->groupBy(['t_room_type.id','t_room_type.name'
             ,'t_room_type.villa','t_room_type.rooms','t_room_type.exbeds','t_room_type.note'
@@ -92,6 +93,7 @@ class RoomSearch extends Room
             ->andFilterWhere(['like', 't_room_type.villa', $this->villa])
             ->andFilterWhere(['like', 't_hotel.name', $this->hotel_name])
             ->andFilterWhere(['like', 't_room_type.note', $this->note]);
+         $query->andFilterHaving(['like' , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_RoomsImages.id),"no")', $this->images]);
 
 //        $query->andFilterHaving(["count(distinct wiotto_uni_db.fe_RoomsImages.id)" => $this->images_count]);
 

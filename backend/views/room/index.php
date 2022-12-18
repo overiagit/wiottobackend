@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute' => 'image_ids',
+                'attribute' => 'images',
                 'contentOptions' => ['style' => 'width:150px','class' => 'text-wrap'],
                 'value' => function ($model, $key, $index, $column) {
                    $ids =   $model->getImageIds();

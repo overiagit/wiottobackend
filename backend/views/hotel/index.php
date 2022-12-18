@@ -37,6 +37,21 @@ $this->params['breadcrumbs'][] = $this->title;
             //'country_id',
             //'island_id',
             //'condition:ntext',
+            [
+                'attribute' => 'images',
+//                'contentOptions' => [ 'style' => 'width: 7%;' ],
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getImagesIds();
+                },
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+
+
+//                'filter' => Html::activeInput('text',$searchModel,'images',
+//                    ['class' => 'form-control', 'prompt' => 'All']),
+            ],
+
+//           'images',
 
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{update}{room}{photo}'
