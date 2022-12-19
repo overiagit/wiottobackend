@@ -59,7 +59,7 @@ class Feature extends \yii\db\ActiveRecord
 
     public static function getList()
     {
-        return ArrayHelper::map(self::find()->select('id, name')->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->select('`id`, `num_name` as name')->all(), 'id', 'name');
 
     }
 
