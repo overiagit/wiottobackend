@@ -80,7 +80,7 @@ class HotelSearch extends Hotel
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            't_hotel.id' => $this->id,
             'type_id' => $this->type_id,
             'town_id' => $this->town_id,
             'latitude' => $this->latitude,
