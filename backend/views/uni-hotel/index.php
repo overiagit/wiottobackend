@@ -71,9 +71,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Html::activeInput('text',$searchModel,'wiotto_hotel_name',
                     ['class' => 'form-control', 'prompt' => 'Все']),
             ],
+
             //'Longitude',
             //'Latitude',
-            //'date_add',
+            'date_add',
 
 //           ['class' => 'yii\grid\ActionColumn'],
 

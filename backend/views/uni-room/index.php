@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'maxpax',
             'parent',
+            'date_add',
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{update}',],
         ],
