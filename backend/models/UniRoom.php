@@ -81,6 +81,17 @@ class UniRoom extends \yii\db\ActiveRecord
 
 
 
+    public static function getCountNotLinkedRooms(){
+      return  self::find()->select(['distinct t_uni_room_type.id'])
+          ->innerJoin('t_uni_hotel', 't_uni_hotel.id = t_uni_room_type.hotel_uni_id')
+          ->where(['is', 'room_type_id'
+          , new \yii\db\Expression('null')])
+          ->andWhere(['=', 't_uni_hotel.CountryId', '228'])
+          ->count();
+    }
+
+
+
     /**
      * Gets query for [[Room]].
      *
