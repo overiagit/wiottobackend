@@ -9,13 +9,22 @@ use yii\widgets\Pjax;
 
 $this->title = 'Uni Rooms';
 $this->params['breadcrumbs'][] = $this->title;
-$notLinked = \backend\models\UniRoom::getCountNotLinkedRooms();
+$notLinked228 = \backend\models\UniRoom::getCountNotLinkedRooms('228');
+$notLinked217 = \backend\models\UniRoom::getCountNotLinkedRooms('217');
 ?>
 <div class="uni-room-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <div class="d-flex justify-content-end"><div><a  href=  "526636?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=228&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniHotelSearch%5Bid%5D=&UniHotelSearch%5Btitle%5D=&UniHotelSearch%5Bhotel_id%5D=0&UniHotelSearch%5Bwiotto_hotel_name%5D=&page=12"
-                                                     class="btn btn-outline-danger align-self-end"><?=$notLinked ?> Not linked</a></div></div>
+    <div class="d-flex justify-content-end">
+        <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=228&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&id=%5D"
+                                                     class="btn btn-outline-danger align-self-end"><?=$notLinked228?> rooms Not linked Maldives</a>
+        </div>
+<!--    </div>-->
+<!--    <div class="d-flex justify-content-end">-->
+        <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=217&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&id=%5D="
+                                                     class="btn btn-outline-danger align-self-end"><?=$notLinked217?> rooms Not linked Indonesia</a>
+        </div>
+    </div>
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
