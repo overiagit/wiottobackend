@@ -57,12 +57,13 @@ class HotelSearch extends Hotel
             ,'t_hotel.island_id','t_hotel.name','t_hotel.note','t_hotel.condition'
             ,'t_hotel.latitude','t_hotel.longitude'
             , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_HotelsImages.id),"no") as images'
+            ,'t_hotel.tourplan_code'
         ]);
 
         $query->groupBy(['t_hotel.id','t_hotel.type_id'
             ,'t_hotel.town_id','t_hotel.town_region_id','t_hotel.location_id','t_hotel.country_id'
             ,'t_hotel.island_id','t_hotel.name','t_hotel.note','t_hotel.condition'
-            ,'t_hotel.latitude','t_hotel.longitude']);
+            ,'t_hotel.latitude','t_hotel.longitude' ,'t_hotel.tourplan_code' ]);
 
 
         $dataProvider = new ActiveDataProvider([

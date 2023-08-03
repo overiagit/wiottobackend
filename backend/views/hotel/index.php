@@ -3,16 +3,42 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\HotelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $on_request mixed */
+/* @var $tourplan yii\data\ActiveDataProvider */
+
 
 $this->title = 'Hotels';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hotel-index">
     <h1><?= Html::encode($this->title) ?></h1>
+    <div>
+        <div class="form-group row">
+
+<h3><?= Html::encode("Hotels on request") ?></h3>
+            <?= Select2::widget( [ 'name'=>'request_hotels',
+                'value'=>$on_request,
+                'data' => \yii\helpers\ArrayHelper::map($tourplan, 'id', 'hotel'),
+                'options' => ['placeholder' => Yii::t('app', 'Hotel on request')
+                    ,'allowClear' => true, 'id'=>'cbHotelOnreq', 'multiple' => true,
+                    'class' => "form-control select2-show-search  border-bottom-0",
+                    'onchange' => 'saveSelection(this);', // Викличте JavaScript функцію, яка зберігає дані
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'width' => '100%',
+                    'theme'=>'bootstrap',
+                ],
+            ])?>
+
+
+        </div>
+    </div>
     <p>
         <?= Html::a('Create Hotel', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

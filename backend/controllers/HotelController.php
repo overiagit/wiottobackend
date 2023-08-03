@@ -12,6 +12,7 @@ use backend\models\Island;
 use backend\models\Town;
 use backend\models\TownRegion;
 use backend\models\HotelNote;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,10 +49,15 @@ class HotelController extends Controller
     {
         $searchModel = new HotelSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        // отели которіх нет в юни, будут по запросу
+        $tourplan = Hotel::getHotelsTourplan();
+        $on_request =  Hotel::getHotelsOnRequest();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'tourplan'=>$tourplan,
+            'on_request'=>$on_request
         ]);
     }
 
@@ -269,6 +275,25 @@ class HotelController extends Controller
 //        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+
+    public function actionOnrequest()
+    {
+
+            if (Yii::$app->request->isAjax) {
+                $selectedValues = Yii::$app->request->post('selectedValues');
+
+
+                Hotel::saveOnRequest($selectedValues);
+                // Perform the necessary database update with the $selectedValues
+
+                // Return a response if needed
+                return json_encode(['success' => true]);
+            }
+
+
+        return json_encode(['success' => false, 'error' => 'Invalid request']);
     }
 
     /**

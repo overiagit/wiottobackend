@@ -21,10 +21,11 @@ use yii\helpers\ArrayHelper;
  * @property int $country_id
  * @property int|null $island_id
  * @property string|null $condition
-// * @property string|null $images
+ * @property int $on_request
  * @property UniHotel[] $UniHotels
  * @property array $features
  */
+
 
 
 
@@ -55,7 +56,7 @@ class Hotel extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'type_id', 'town_id', 'name'], 'required', 'message' => 'Requered filds'],
-            [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id'], 'integer', 'message' => 'Requered int'],
+            [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id', ], 'integer', 'message' => 'Requered int'],
             [['latitude', 'longitude'], 'number', 'message' => 'Requered number'],
             [['comment', 'note', 'condition'], 'string'],
             [['name'], 'string', 'max' => 128],
@@ -153,6 +154,29 @@ class Hotel extends \yii\db\ActiveRecord
                  ->all(), 'id', 'name');
     }
 
+    public  static function getHotelsTourplan(){
+        $sql =  "select  h.id , concat(h.id , ' ', th.SupplierName, ' ' , ifnull(th.ClassDescription,'') 
+        , ' ', ifnull(th.LocalityDescription,'') , ' ' , c.`name`)  as hotel 
+        from t_hotel h 
+        inner join t_tourplan_hotel th on th.SupplierId = h.tourplan_id
+        left join wiotto_db.t_country c on c.id = h.country_id 
+        where h.tourplan_code is not  null;";
+        $cmd = self::getDb()->createCommand($sql);
+         $hotels =  $cmd->queryAll();
+         return $hotels;
+    }
+
+    public  static  function getHotelsOnRequest(){
+        $hotels = self::find()->where(['on_request' => 1])
+            ->select(["id"])
+            ->asArray() // Добавимо цей метод, щоб отримати результат як масив
+            ->all();
+
+        $hotelIds = array_column($hotels, 'id'); // Витягаємо тільки значення 'id' з масиву об'єктів
+
+        return $hotelIds; // Повертаємо масив зі значеннями 'id'
+    }
+
     public static function getLastId(){
         return  self::find()->max('id');
     }
@@ -168,6 +192,17 @@ class Hotel extends \yii\db\ActiveRecord
             $cmd = self::getDb()->createCommand($sql);
             $cmd->execute();
         }
+    }
+
+    public static function saveOnRequest(array $onreq){
+        $onreq = implode(',',$onreq);
+
+        $sql = sprintf("update  wiotto_db.t_hotel set on_request=0 where id not in (%s);
+                               update  wiotto_db.t_hotel set on_request=1 where id  in (%s);",$onreq, $onreq);
+        $cmd = self::getDb()->createCommand($sql);
+        $cmd->execute();
+
+
     }
 
     /**
