@@ -99,20 +99,48 @@ class RoomController extends Controller
         }
 
 
-//        $model = new Room();
-//
-//        if ($this->request->isPost) {
+        $model = new Room();
+
+        if ($this->request->isPost) {
 //            if ($model->load($this->request->post()) && $model->save()) {
 //                return $this->redirect(['view', 'id' => $model->id]);
 //            }
-//        }
-//        else {
-//            $model->loadDefaultValues();
-//        }
-//
-//        return $this->render('create', [
-//            'model' => $model,
-//        ]);
+
+            $post = $this->request->post();
+            $model->villa = implode(',',$post['Room']['villa']);
+
+            unset($post['Room']['villa']);
+
+
+            if($model->load($post)) {
+
+
+
+                if ($model->save())
+                    return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+        }
+        else {
+            $model->loadDefaultValues();
+             $preUrl =  $_SERVER['HTTP_REFERER'];
+            $pat = "/id=\d+$/";
+             preg_match($pat, $preUrl, $matches );
+
+//             $model->hotel_id  = str_replace("id=","",explode('?',$preUrl)[1]);
+            $model->hotel_id =  str_replace("id=","",$matches[0]);
+            $model->id = Room::getLastId()+1;
+
+
+            $data['villa'] =  Villa::getList();
+            $data['hotel'] = Hotel::getlist($model->hotel_id);
+
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'data' =>$data,
+        ]);
     }
 
     /**

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Room */
+/* @var $data array */
 
 $this->title = 'Create Room';
 $this->params['breadcrumbs'][] = ['label' => 'Rooms', 'url' => [$model->hotel_id]];
@@ -15,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'data' => $data,
+
     ]) ?>
 
 </div>

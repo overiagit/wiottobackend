@@ -134,9 +134,12 @@ class Hotel extends \yii\db\ActiveRecord
         return substr($ids,0,10).' ...';
     }
 
-    public static function getList()
+    public static function getList($id = null)
     {
-        return ArrayHelper::map(self::find()->select('id, name')->all(), 'id', 'name');
+        if(is_null($id))
+           return ArrayHelper::map(self::find()->select('id, name')->all(), 'id', 'name');
+        else
+            return ArrayHelper::map(self::find()->where(['id'=>$id])->select('id, name')->all(), 'id', 'name');
     }
 
     public static function getHotelDataList()
@@ -160,7 +163,8 @@ class Hotel extends \yii\db\ActiveRecord
         from t_hotel h 
         inner join t_tourplan_hotel th on th.SupplierId = h.tourplan_id
         left join wiotto_db.t_country c on c.id = h.country_id 
-        where h.tourplan_code is not  null;";
+        where h.tourplan_code is not  null 
+        order by th.SupplierName;";
         $cmd = self::getDb()->createCommand($sql);
          $hotels =  $cmd->queryAll();
          return $hotels;

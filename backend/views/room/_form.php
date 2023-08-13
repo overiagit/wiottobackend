@@ -74,6 +74,7 @@ use yii\widgets\ActiveForm;
     </div>
 
 
+    <?php if(Yii::$app->controller->action->id !== 'create'): ?>
     <div class="form-group row">
         <div class="col col-md-10">
             <?= Html::textarea('note_en', $data['note']['en']['note'],['id'=>'txt_note_en','class'=>'form-control', 'rows'=>6]) ?>
@@ -98,6 +99,7 @@ use yii\widgets\ActiveForm;
             <?=Html::button('FR',['id'=>'btn_note_fr','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
         </div>
     </div>
+    <?php  endif; ?>
 
 
     <?= $form->field($model, 'active')->checkbox() ?>
