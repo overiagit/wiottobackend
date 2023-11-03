@@ -47,6 +47,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Plan you trip', 'url' => ['/plan-trip']];
         $menuItems[] = ['label' => 'Coupon', 'url' => ['/coupon']];
         $menuItems[] = ['label' => 'NotLinled', 'url' => ['/linkroom']];
+        $menuItems[] = ['label' => 'Features', 'url' => ['/option']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(
