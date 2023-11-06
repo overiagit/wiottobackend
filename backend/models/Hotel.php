@@ -49,6 +49,11 @@ class Hotel extends \yii\db\ActiveRecord
         return Yii::$app->get('db1');
     }
 
+    public static function getCountry( $hotel_id)
+    {
+         return  self::find()->where(['id'=>$hotel_id])->select('country_id')->one()["country_id"];
+    }
+
     /**
      * {@inheritdoc}
      */

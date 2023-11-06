@@ -129,10 +129,12 @@ class RoomController extends Controller
 
 //             $model->hotel_id  = str_replace("id=","",explode('?',$preUrl)[1]);
             $model->hotel_id =  str_replace("id=","",$matches[0]);
+
             $model->id = Room::getLastId()+1;
 
+            $country_id = Hotel::getCountry($model->hotel_id);
+            $data['villa'] =  Villa::getListByCountry($country_id);
 
-            $data['villa'] =  Villa::getList();
             $data['hotel'] = Hotel::getlist($model->hotel_id);
 
         }
@@ -153,7 +155,9 @@ class RoomController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $data['villa'] =  Villa::getList();
+        $country_id = Hotel::getCountry($model->hotel_id);
+        $data['villa'] =  Villa::getListByCountry($country_id);
+//        $data['villa'] =  Villa::getList();
         $data['hotel'] = Hotel::getlist();
 
         $data['note']['en'] = RoomNote::find()->where(['room_type_id' => $id,'lang'=>'en'])->one();

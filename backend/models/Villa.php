@@ -60,4 +60,9 @@ class Villa extends \yii\db\ActiveRecord
     {
         return ArrayHelper::map(self::find()->select('id, name')->all(), 'id', 'name');
     }
+
+    public static function getListByCountry($country_id)
+    {
+        return ArrayHelper::map(self::find()->where(['country_id'=>[null, $country_id]])->select('id, name')->all(), 'id', 'name');
+    }
 }
