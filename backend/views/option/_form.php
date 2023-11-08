@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
 
 
     <?= $form->field($model, 'country_id')->dropDownList(
-        [0=>"All",582=>"Maldives", 217=>"Indonesia"],
+        [582=>"Maldives", 217=>"Indonesia"],
         ['prompt' => 'For all', 'id' => 'select_country_id']
     )->label('Country') ?>
 
