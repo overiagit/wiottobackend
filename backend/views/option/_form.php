@@ -15,11 +15,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id')->textInput() ?>
 
-<!--    --><?php //= $form->field($model, 'type')->textInput() ?>
+
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'show')->textInput() ?>
+
+    <?= $form->field($model, 'show')->checkbox() ?>
+    <?= $form->field($model, 'show_list')->checkbox() ?>
 
     <?= $form->field($model, 'uni_id')->textInput(['readonly'=>true]) ?>
 

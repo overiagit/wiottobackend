@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'type',
             'name',
             'show',
+            'show_list',
 //            'uni_id',
             //'tourplan_code',
 //            'country_id',

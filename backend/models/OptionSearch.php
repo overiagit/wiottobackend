@@ -19,7 +19,7 @@ class OptionSearch extends Option
     public function rules()
     {
         return [
-            [['id', 'type', 'show', 'uni_id', 'country_id', 'group_id'], 'integer'],
+            [['id', 'type', 'show','show_list', 'uni_id', 'country_id', 'group_id'], 'integer'],
             [['name', 'tourplan_code', 'group_name'], 'safe'],
         ];
     }
@@ -48,7 +48,7 @@ class OptionSearch extends Option
             , 't_option.group_id = wiotto_db.t_option_group.id' );
 
         $query->select(['t_option.id','t_option.group_id'
-            ,'t_option.type','t_option.name','t_option.show','t_option.uni_id'
+            ,'t_option.type','t_option.name','t_option.show','t_option.show_list','t_option.uni_id'
             ,'t_option.tourplan_code','t_option.country_id','t_option_group.name as group_name'
         ]);
 
@@ -71,6 +71,7 @@ class OptionSearch extends Option
             'id' => $this->id,
             'type' => $this->type,
             'show' => $this->show,
+            'show_list' => $this->show_list,
             'uni_id' => $this->uni_id,
             'country_id' => $this->country_id,
             'group_id' => $this->group_id,

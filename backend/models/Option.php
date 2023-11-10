@@ -11,6 +11,7 @@ use Yii;
  * @property int $type 0-hotel,1-room type
  * @property string $name
  * @property int $show
+ * @property int $show_list
  * @property int|null $uni_id id from uni
  * @property string|null $tourplan_code
  * @property int|null $country_id
@@ -47,7 +48,7 @@ class Option extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'type', 'name'], 'required'],
-            [['id', 'type', 'show', 'uni_id', 'country_id', 'group_id'], 'integer'],
+            [['id', 'type', 'show', 'show_list','uni_id', 'country_id', 'group_id'], 'integer'],
             [['name'], 'string', 'max' => 128],
             [['tourplan_code'], 'string', 'max' => 20],
             [['id', 'type'], 'unique', 'targetAttribute' => ['id', 'type']],
@@ -64,7 +65,8 @@ class Option extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'type' => Yii::t('app', '0-hotel,1-room type'),
             'name' => Yii::t('app', 'Name'),
-            'show' => Yii::t('app', 'Show'),
+            'show' => Yii::t('app', 'Show (NOT best for you) '),
+            'show_list' => Yii::t('app', 'Show in hotel item 2page '),
             'uni_id' => Yii::t('app', 'id from uni'),
             'tourplan_code' => Yii::t('app', 'Tourplan Code'),
             'country_id' => Yii::t('app', 'Country ID'),
