@@ -63,4 +63,9 @@ class Town extends \yii\db\ActiveRecord
     {
         return ArrayHelper::map(self::find()->where(['country_id'=>582])->select('id, name')->all(), 'id', 'name');
     }
+
+    public static function getListByCountry($country_id)
+    {
+        return ArrayHelper::map(self::find()->where(['country_id'=>$country_id])->select('id, name')->all(), 'id', 'name');
+    }
 }

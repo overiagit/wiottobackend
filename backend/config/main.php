@@ -59,6 +59,10 @@ return [
                 'hotel-image/<hotel_id:\d+>' => 'hotel-image/index',
                 'room-image/<room_id:\d+>' => 'room-image/index',
                 'hotel-image/create/<hotel_id:\d+>' => 'hotel-image/create',
+                'hotel/town/<country_id:\d+>'=>'hotel/town',
+                'hotel/town-region/<country_id:\d+>'=>'hotel/town-region',
+                'hotel/island/<country_id:\d+>'=>'hotel/island',
+                'hotel/feature/<country_id:\d+>'=>'hotel/feature',
             ],
         ],
 

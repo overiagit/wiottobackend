@@ -17,28 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hotel-index">
     <h1><?= Html::encode($this->title) ?></h1>
-    <div>
-        <div class="form-group row">
 
-<h3><?= Html::encode("Hotels on request") ?></h3>
-            <?= Select2::widget( [ 'name'=>'request_hotels',
-                'value'=>$on_request,
-                'data' => \yii\helpers\ArrayHelper::map($tourplan, 'id', 'hotel'),
-                'options' => ['placeholder' => Yii::t('app', 'Hotel on request')
-                    ,'allowClear' => true, 'id'=>'cbHotelOnreq', 'multiple' => true,
-                    'class' => "form-control select2-show-search  border-bottom-0",
-                    'onchange' => 'saveSelection(this);', // Викличте JavaScript функцію, яка зберігає дані
-                ],
-                'pluginOptions' => [
-                    'allowClear' => true,
-                    'width' => '100%',
-                    'theme'=>'bootstrap',
-                ],
-            ])?>
-
-
-        </div>
-    </div>
     <p>
         <?= Html::a('Create Hotel', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -117,4 +96,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
 
     ]); ?>
+
+    <div>
+        <div class="form-group row">
+            <h3><?= Html::encode("Hotels on request") ?></h3>
+            <?= Select2::widget( [ 'name'=>'request_hotels',
+                'value'=>$on_request,
+                'data' => \yii\helpers\ArrayHelper::map($tourplan, 'id', 'hotel'),
+                'options' => ['placeholder' => Yii::t('app', 'Hotel on request')
+                    ,'allowClear' => true, 'id'=>'cbHotelOnreq', 'multiple' => true,
+                    'class' => "form-control select2-show-search  border-bottom-0",
+                    'onchange' => 'saveSelection(this);', // Викличте JavaScript функцію, яка зберігає дані
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'width' => '100%',
+                    'theme'=>'bootstrap',
+                ],
+            ])?>
+        </div>
+    </div>
 </div>

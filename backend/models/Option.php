@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "t_option".
@@ -14,7 +15,8 @@ use Yii;
  * @property int $show_list
  * @property int|null $uni_id id from uni
  * @property string|null $tourplan_code
- * @property int|null $country_id
+ * @property mixed|null $country_id
+ * @property mixed|null $country_ids
  * @property int|null $group_id
  *
  * @property OptionGroup $group
@@ -25,6 +27,8 @@ use Yii;
  */
 class Option extends \yii\db\ActiveRecord
 {
+    public $country_ids ;
+
     /**
      * {@inheritdoc}
      */
@@ -48,9 +52,9 @@ class Option extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'type', 'name'], 'required'],
-            [['id', 'type', 'show', 'show_list','uni_id', 'country_id', 'group_id'], 'integer'],
+            [['id', 'type', 'show', 'show_list','uni_id', 'group_id'], 'integer'],
             [['name'], 'string', 'max' => 128],
-            [['tourplan_code'], 'string', 'max' => 20],
+            [['tourplan_code','country_id' ], 'string', 'max' => 20],
             [['id', 'type'], 'unique', 'targetAttribute' => ['id', 'type']],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => OptionGroup::class, 'targetAttribute' => ['group_id' => 'id']],
         ];
@@ -95,24 +99,8 @@ class Option extends \yii\db\ActiveRecord
         return $this->hasMany(Hotel::class, ['id' => 'hotel_id'])->viaTable('t_hotel_option', ['option_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Hotels0]].
-     *
-     * @return \yii\db\ActiveQuery|HotelQuery
-     */
-    public function getHotels0()
-    {
-        return $this->hasMany(Hotel::class, ['id' => 'hotel_id'])->viaTable('t_hotel_option_230809', ['option_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[THotelOption230809s]].
-     *
-     * @return \yii\db\ActiveQuery|HotelOption230809Query
-     */
-    public function getTHotelOption230809s()
-    {
-        return $this->hasMany(HotelOption230809::class, ['option_id' => 'id']);
+    public static function getLastId(){
+        return  self::find()->max('id');
     }
 
     /**
@@ -132,5 +120,11 @@ class Option extends \yii\db\ActiveRecord
     public static function find()
     {
         return new OptionQuery(get_called_class());
+    }
+
+    public static function getListByCountry($countryId)
+    {
+        return ArrayHelper::map(self::find()->where(['like','country_id', '%'.$countryId.'%',false ])->select('`id`, `name` as name')->all(), 'id', 'name');
+
     }
 }

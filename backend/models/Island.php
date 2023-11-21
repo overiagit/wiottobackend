@@ -62,4 +62,14 @@ class Island extends \yii\db\ActiveRecord
             ->innerJoin('t_town', 't_town_region.town_id = t_town.id' )
             ->where(['t_town.country_id'=>582])->select('t_island.id as id, t_island.name as name')->all(), 'id', 'name');
     }
+
+
+    public static function getListByCountry($country_id)
+    {
+        return ArrayHelper::map(self::find()
+            ->innerJoin('t_town_region', 't_town_region.id = t_island.town_region_id' )
+            ->innerJoin('t_town', 't_town_region.town_id = t_town.id' )
+            ->where(['t_town.country_id'=>$country_id])
+            ->select('t_island.id as id, t_island.name as name')->all(), 'id', 'name');
+    }
 }

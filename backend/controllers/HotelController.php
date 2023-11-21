@@ -9,6 +9,7 @@ use backend\models\HotelImageSearch;
 use backend\models\HotelSearch;
 use backend\models\HotelType;
 use backend\models\Island;
+use backend\models\Option;
 use backend\models\Town;
 use backend\models\TownRegion;
 use backend\models\HotelNote;
@@ -83,11 +84,18 @@ class HotelController extends Controller
     {
         $model = new Hotel();
         $model->id = -1;
+//        $data['country'] = [582=>"Maldives", 217=>"Indonesia"];
         $data['hotel_type'] = HotelType::getList();
-        $data['town'] = Town::getList();
-        $data['island'] = Island::getList();
-        $data['town_region'] = TownRegion::getList();
-        $data['feature_list'] = Feature::getList();
+//        $data['town'] = Town::getList();
+//        $data['island'] = Island::getList();
+//        $data['town_region'] = TownRegion::getList();
+//        $data['feature_list'] = Feature::getList();
+
+
+        $data['town'] = [];
+        $data['island'] =[];
+        $data['town_region'] = [];
+        $data['feature_list'] =[];
 
         $data['note']['en']['note'] = "";
         $data['note']['ru']['note'] = "";
@@ -111,7 +119,7 @@ class HotelController extends Controller
             $post = $this->request->post();
             $post['Hotel']['id'] = Hotel::getLastId() + 1;
             if ($model->load($post) ) {
-                $model->country_id = 582;
+//                $model->country_id = 582;
                 if ($model->save()) {
 
 
@@ -174,10 +182,10 @@ class HotelController extends Controller
     {
         $model = $this->findModel($id);
         $data['hotel_type'] = HotelType::getList();
-        $data['town'] = Town::getList();
-        $data['island'] = Island::getList();
-        $data['town_region'] = TownRegion::getList();
-        $data['feature_list'] = Feature::getList();
+        $data['town'] = Town::getListByCountry($model->country_id);
+        $data['island'] = Island::getListByCountry($model->country_id);
+        $data['town_region'] = TownRegion::getListByCountry($model->country_id);
+        $data['feature_list'] = Feature::getListByCountry($model->country_id);
        // $data['features'] = null;//HotelFeature::getByHotel($id);
 
        // HotelFeature::getByHotel($id);//
@@ -294,6 +302,42 @@ class HotelController extends Controller
 
 
         return json_encode(['success' => false, 'error' => 'Invalid request']);
+    }
+
+    public function actionTown($country_id){
+        if (Yii::$app->request->isAjax)
+        {
+            $items = Town::getListByCountry($country_id);
+            return json_encode($items);
+        }
+        return json_encode([]);
+    }
+
+    public function actionTownRegion($country_id){
+        if (Yii::$app->request->isAjax)
+        {
+            $items = TownRegion::getListByCountry($country_id);
+            return json_encode($items);
+        }
+        return json_encode([]);
+    }
+
+    public function actionIsland($country_id){
+        if (Yii::$app->request->isAjax)
+        {
+            $items = Island::getListByCountry($country_id);
+            return json_encode($items);
+        }
+        return json_encode([]);
+    }
+
+    public function actionFeature($country_id){
+//        if (Yii::$app->request->isAjax)
+        {
+            $items = Feature::getListByCountry($country_id);
+            return json_encode($items);
+        }
+        return json_encode([]);
     }
 
     /**

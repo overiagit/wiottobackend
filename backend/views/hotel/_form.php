@@ -52,6 +52,25 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group row">
         <div class="col-6 col-md-2">
+            <?= $form->field($model, 'country_id')->textInput(['readonly'=>true,'id'=>'txtCountryId']) ?>
+        </div>
+        <div class="col-6 col-md-8">
+            <?= $form->field($model, 'country_id')->dropDownList(
+                [582=>"Maldives", 217=>"Indonesia"],
+                ['prompt' => '', 'id' => 'select-country_id','onChange'=>'
+                     $("#txtCountryId").val(this.value);
+                      $("#hotel-country_id").val(this.value);
+                     updateTownOptions(this.value);
+                     updateTownRegionOptions(this.value);
+                     updateIslandOptions(this.value);
+                     updateFeatureOptions(this.value);
+                    ']
+            )->label('Country') ?>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-6 col-md-2">
     <?= $form->field($model, 'town_id')->textInput(['readonly'=>true,'id'=>'txtTownId']) ?>
         </div>
         <div class="col-6 col-md-8">
@@ -108,6 +127,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group row">
+        <div class="col-10">
         <?= $form->field($model, 'features'
         )->widget(Select2::classname(), [
             'data' =>$data['feature_list'], //\yii\helpers\ArrayHelper::map($data['feature_list'], 'id', 'value'),
@@ -121,6 +141,7 @@ use yii\widgets\ActiveForm;
                            'theme'=>'material',
             ],
         ])->label(false) ?>
+        </div>
     </div>
 
     <div class="form-group row">
@@ -221,3 +242,120 @@ use yii\widgets\ActiveForm;
           </div>
       </div>
   </div>
+
+
+  <script>
+      function updateTownOptions(countryId) {
+          // Make an AJAX request to fetch towns based on the selected country
+          $.ajax({
+              url: `/hotel/town/` + countryId,
+              type: 'GET',
+              // data: {countryId: countryId},
+              success: function (data) {
+                  // Update the options in the town dropdown
+                  // $("#select-town_id").html(data);
+                  const select = $("#select-town_id");
+                  select.empty(); // Clear existing options
+
+                  // Add prompt option if needed
+                  select.append('<option value="">Select Town</option>');
+
+                  // Loop through the JSON data and add options
+                  $.each(JSON.parse(data), function(id, option) {
+                      select.append('<option value="' + id + '">' + option + '</option>');
+                  });
+
+              },
+              error: function () {
+                  console.error('Error fetching towns');
+              }
+          });
+      }
+
+
+      function updateTownRegionOptions(countryId) {
+          // Make an AJAX request to fetch towns based on the selected country
+          $.ajax({
+              url: `/hotel/town-region/` + countryId,
+              type: 'GET',
+              // data: {countryId: countryId},
+              success: function (data) {
+                  // Update the options in the town dropdown
+                  // $("#select-town_region_id").html(data);
+
+                  const select = $("#select-town_region_id");
+                  select.empty(); // Clear existing options
+
+                  // Add prompt option if needed
+                  select.append('<option value="">Select Town region</option>');
+
+                  // Loop through the JSON data and add options
+                  $.each(JSON.parse(data), function(id, option) {
+                      select.append('<option value="' + id + '">' + option + '</option>');
+                  });
+              },
+              error: function () {
+                  console.error('Error fetching towns');
+              }
+          });
+      }
+
+      function updateIslandOptions(countryId) {
+          // Make an AJAX request to fetch islands based on the selected country
+          $.ajax({
+              url: `/hotel/island/` + countryId,
+              type: 'GET',
+              // data: {countryId: countryId},
+              success: function (data) {
+                  // Update the options in the island dropdown
+                  // $("#select-island_id").html(data);
+
+                  const select = $("#select-island_id");
+                  select.empty(); // Clear existing options
+
+                  // Add prompt option if needed
+                  select.append('<option value="">Select Island</option>');
+
+                  // Loop through the JSON data and add options
+                  $.each(JSON.parse(data), function(id, option) {
+                      select.append('<option value="' + id + '">' + option + '</option>');
+                  });
+              },
+              error: function () {
+                  console.error('Error fetching islands');
+              }
+          });
+      }
+
+
+      function updateFeatureOptions(countryId) {
+          // Make an AJAX request to fetch features based on the selected country
+          $.ajax({
+              url: '/hotel/feature/' + countryId,
+              type: 'GET',
+             // data: {countryId: countryId},
+              dataType: 'json',
+              success: function (data) {
+                  // Update the options in the Select2 dropdown
+                  var cbFeature = $("#cbFeature");
+
+                  // Clear existing options
+                  cbFeature.empty();
+
+                  // Add prompt option if needed
+                  cbFeature.append('<option value=""></option>');
+
+                  // Loop through the JSON data and add options
+                  $.each((data), function(id, option) {
+                      cbFeature.append(new Option(option, id, false, false));
+                  });
+
+                  // Trigger change event to update Select2
+                  cbFeature.trigger('change');
+              },
+              error: function () {
+                  console.error('Error fetching features');
+              }
+          });
+      }
+  </script>

@@ -60,7 +60,7 @@ class Hotel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'type_id', 'town_id', 'name'], 'required', 'message' => 'Requered filds'],
+            [['id', 'type_id', 'town_id', 'name', 'country_id'], 'required', 'message' => 'Requered filds'],
             [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id', ], 'integer', 'message' => 'Requered int'],
             [['latitude', 'longitude'], 'number', 'message' => 'Requered number'],
             [['comment', 'note', 'condition'], 'string'],

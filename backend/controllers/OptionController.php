@@ -70,10 +70,16 @@ class OptionController extends Controller
     public function actionCreate()
     {
         $model = new Option();
+        $model->id = -1;
         $data['option_group'] = OptionGroup::getList();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $post = $this->request->post();
+            $post['Option']['id'] = Option::getLastId() + 1;
+            $post['Option']['country_id'] = implode(',',$post['Option']['country_ids'] );
+            $post['Option']['type']=0;
+            if ($model->load($post)){
+                if( $model->save())
                 return $this->redirect(['view', 'id' => $model->id, 'type' => $model->type]);
             }
         } else {
@@ -97,11 +103,14 @@ class OptionController extends Controller
     public function actionUpdate($id, $type)
     {
         $model = $this->findModel($id, $type);
+        $model->country_ids = explode(',', $model->country_id);
         $data['option_group'] = OptionGroup::getList();
 
-        if ($this->request->isPost && $model->load($this->request->post())
-            && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'type' => $model->type]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $post = $this->request->post();
+            $model->country_id = implode(',',$post['Option']['country_ids']);
+             if($model->save())
+                return $this->redirect(['view', 'id' => $model->id, 'type' => $model->type]);
         }
 
         return $this->render('update', [

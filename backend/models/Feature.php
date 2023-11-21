@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property int $type 0-hotel,1-room type
  * @property string $name
+ * @property string $country_id
  */
 class Feature extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class Feature extends \yii\db\ActiveRecord
         return [
             [['id', 'name'], 'required'],
             [['id', 'type'], 'integer'],
-            [['name'], 'string', 'max' => 128],
+            [['name', 'country_id'], 'string', 'max' => 128],
         ];
     }
 
@@ -60,6 +61,12 @@ class Feature extends \yii\db\ActiveRecord
     public static function getList()
     {
         return ArrayHelper::map(self::find()->select('`id`, `num_name` as name')->all(), 'id', 'name');
+
+    }
+
+    public static function getListByCountry($countryId)
+    {
+        return ArrayHelper::map(self::find()->where(['like','country_id', '%'.$countryId.'%',false])->select('`id`, `num_name` as name')->all(), 'id', 'name');
 
     }
 
