@@ -41,19 +41,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'show_list',
 //            'uni_id',
             //'tourplan_code',
-//            'country_id',
-            [
-                 'class' => 'kartik\grid\EnumColumn',
-                 'attribute' => 'country_id',
-                 'enum' => [
-                     '582' => 'Maldives',
-                     '217' => 'Indonesia',
-                 ],
-                 'filter' => [  // will override the grid column filter (i.e. `loadEnumAsFilter` will be parsed as `false`)
-                     '582' => 'Maldives',
-                     '217' => 'Indonesia',
-                 ],
-            ],
+            'country_id',
+//            [
+//                 'class' => 'kartik\grid\EnumColumn',
+//                 'attribute' => 'country_id',
+//                 'enum' => [
+//                     '582' => 'Maldives',
+//                     '217' => 'Indonesia',
+//                 ],
+//                 'filter' => [  // will override the grid column filter (i.e. `loadEnumAsFilter` will be parsed as `false`)
+//                     '582' => 'Maldives',
+//                     '217' => 'Indonesia',
+//                 ],
+//            ],
 
 //            'group_name',
             [
