@@ -77,7 +77,7 @@ class OptionSearch extends Option
             'group_id' => $this->group_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 't_option.name', $this->name])
             ->andFilterWhere(['like', 'tourplan_code', $this->tourplan_code])
             ->andFilterWhere(['like', 't_option_group.name', $this->group_name]);
 
