@@ -132,14 +132,14 @@ use yii\widgets\ActiveForm;
         )->widget(Select2::classname(), [
             'data' =>$data['feature_list'], //\yii\helpers\ArrayHelper::map($data['feature_list'], 'id', 'value'),
             'options' => ['placeholder' => Yii::t('app', 'Feature')  ,'allowClear' => true, 'id'=>'cbFeature'
-            , 'name'=>'Hotel[Features1]' ,'multiple' => true,
+            , 'name'=>'Hotel[Features1]' ,'multiple' => true, 'disabled'=>true,
                 'class' => "form-control select2-show-search  border-bottom-0",
             ],
             'pluginOptions' => [
                            'allowClear' => true,
                 'width' => '100%',
-
-                           'theme'=>'material',
+'disabled'=>true,
+                'theme'=>'material',
             ],
         ])->label(false) ?>
         </div>
