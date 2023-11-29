@@ -66,7 +66,9 @@ class Feature extends \yii\db\ActiveRecord
 
     public static function getListByCountry($countryId)
     {
-        return ArrayHelper::map(self::find()->where(['like','country_id', '%'.$countryId.'%',false])->select('`id`, `num_name` as name')->all(), 'id', 'name');
+        return ArrayHelper::map(self::find()->where(['like','country_id', '%'.$countryId.'%',false])
+            ->orderBy(["name"=>SORT_ASC])
+            ->select('`id`, `name`')->all(), 'id', 'name');
 
     }
 

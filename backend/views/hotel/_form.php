@@ -145,6 +145,14 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group row">
+        <div class="col-10">
+            <?= $form->field($model, 'features')->checkboxList(
+                    $data['feature_list']);
+                    ?>
+        </div>
+        </div>
+
+    <div class="form-group row">
         <div class="col col-md-10">
         <?= $form->field($model, 'note')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
         </div>
