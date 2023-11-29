@@ -131,7 +131,8 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'features'
         )->widget(Select2::classname(), [
             'data' =>$data['feature_list'], //\yii\helpers\ArrayHelper::map($data['feature_list'], 'id', 'value'),
-            'options' => ['placeholder' => Yii::t('app', 'Feature')  ,'allowClear' => true, 'id'=>'cbFeature', 'multiple' => true,
+            'options' => ['placeholder' => Yii::t('app', 'Feature')  ,'allowClear' => true, 'id'=>'cbFeature'
+            , 'name'=>'Hotel[Features1]' ,'multiple' => true,
                 'class' => "form-control select2-show-search  border-bottom-0",
             ],
             'pluginOptions' => [
