@@ -44,7 +44,7 @@ class HotelSearch extends Hotel
      */
     public function search($params)
     {
-        $query = Hotel::find()->where(['country_id' => [582,228, 217]]);
+        $query = Hotel::find()->where(['country_id' => [582,228, 217,82]]);
 
         // add conditions that should always apply here
 

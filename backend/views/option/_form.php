@@ -38,7 +38,7 @@ use kartik\select2\Select2;
         <div class="col-10">
             <?= $form->field($model, 'country_ids'
             )->widget(Select2::classname(), [
-                'data' =>[582=>"Maldives", 217=>"Indonesia"], //\yii\helpers\ArrayHelper::map($data['feature_list'], 'id', 'value'),
+                'data' =>[582=>"Maldives", 217=>"Indonesia", 82=>"Seychelles"], //\yii\helpers\ArrayHelper::map($data['feature_list'], 'id', 'value'),
                 'options' => ['placeholder' => Yii::t('app', 'Country')
                     ,'allowClear' => true, 'id'=>'cbCountry', 'multiple' => true,
                     'class' => "form-control select2-show-search  border-bottom-0",

@@ -56,7 +56,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-6 col-md-8">
             <?= $form->field($model, 'country_id')->dropDownList(
-                [582=>"Maldives", 217=>"Indonesia"],
+                [582=>"Maldives", 217=>"Indonesia", 82=>"Seychelles"],
                 ['prompt' => '', 'id' => 'select-country_id','onChange'=>'
                      $("#txtCountryId").val(this.value);
                       $("#hotel-country_id").val(this.value);
