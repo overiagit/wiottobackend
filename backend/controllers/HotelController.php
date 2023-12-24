@@ -253,6 +253,7 @@ class HotelController extends Controller
 
 
                // if(!empty($post['Hotel']['features']))
+                    if(is_array($post['Hotel']['features']))
                     $model->saveFeatures($post['Hotel']['features']);
 
 
