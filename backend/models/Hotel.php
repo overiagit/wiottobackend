@@ -153,7 +153,6 @@ class Hotel extends \yii\db\ActiveRecord
             ->leftJoin('t_hotel_type', 't_hotel.type_id = t_hotel_type.id')
             ->leftJoin('t_town_region', 't_hotel.town_region_id = t_town_region.id')
             ->leftJoin('t_island', 't_hotel.island_id = t_island.id')
-//            ->leftJoin('fe_HotelsImages', 't_hotel.id = t_island.id')
             ->select(["`t_hotel`.`id` as `id`"
                 , "concat(`t_hotel`.`name`,' ', ifnull(`t_hotel_type`.`name`,'') 
                  , ifnull( concat(' region:' ,`t_town_region`.`name` ),'') 
@@ -161,6 +160,24 @@ class Hotel extends \yii\db\ActiveRecord
             ->orderBy(['`t_hotel`.`name`'=>SORT_ASC])
                  ->all(), 'id', 'name');
     }
+
+
+    public static function getHotelDataListByCountry($country_id)
+    {
+        return ArrayHelper::map(self::find()
+            ->leftJoin('t_hotel_type', 't_hotel.type_id = t_hotel_type.id')
+            ->leftJoin('t_town_region', 't_hotel.town_region_id = t_town_region.id')
+            ->leftJoin('t_island', 't_hotel.island_id = t_island.id')
+            ->leftJoin('t_country', 't_hotel.country_id = t_country.id')
+            ->select(["`t_hotel`.`id` as `id`"
+                , "concat(`t_hotel`.`name`,' ', ifnull(`t_hotel_type`.`name`,'') 
+                 , ifnull( concat(' region:' ,`t_town_region`.`name` ),'') 
+                 , ifnull(concat(' island:',`t_island`.`name` ),'') ,' --', t_country.name ) as `name`"])
+            ->orderBy(['`t_hotel`.`name`'=>SORT_ASC])->where(['t_hotel.country_id'=>$country_id])
+            ->all(), 'id', 'name');
+    }
+
+
 
     public  static function getHotelsTourplan(){
         $sql =  "select  h.id , concat(h.id , ' ', th.SupplierName, ' ' , ifnull(th.ClassDescription,'') 

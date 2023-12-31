@@ -25,7 +25,7 @@ AppAsset::register($this);
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<header>
+<header style="margin-bottom: 40px;">
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
@@ -42,6 +42,7 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => 'FileManager', 'url' => ['/filemanager']];
         $menuItems[] = ['label' => 'Uni-Hotels', 'url' => ['/uni-hotel']];
+        $menuItems[] = ['label' => 'Astro-Hotels', 'url' => ['/accommodation-operator']];
         $menuItems[] = ['label' => 'Wiotto-Hotels', 'url' => ['/hotel']];
         $menuItems[] = ['label' => 'Best-For-You', 'url' => ['/best-for-you']];
         $menuItems[] = ['label' => 'Plan you trip', 'url' => ['/plan-trip']];
