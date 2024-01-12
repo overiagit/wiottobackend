@@ -10,13 +10,14 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
- * @property int|null $country_id
- *
+ * @property mixed|null $country_id
+ * @property mixed|null $country_ids
  * @property OptionGroupLocalization[] $OptionGroupLocalizations
  * @property Option[] $Options
  */
 class OptionGroup extends \yii\db\ActiveRecord
 {
+    public $country_ids ;
     /**
      * {@inheritdoc}
      */
@@ -40,8 +41,8 @@ class OptionGroup extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['country_id'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+//            [['country_id'], 'integer'],
+            [['name','country_id'], 'string', 'max' => 255],
         ];
     }
 

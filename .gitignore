@@ -46,3 +46,6 @@ phpunit.phar
 /.___htaccess
 /.htapasswd
 /backend/web/upload/
+
+
+/.vscode

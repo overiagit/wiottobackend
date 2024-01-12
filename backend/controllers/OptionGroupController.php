@@ -70,7 +70,9 @@ class OptionGroupController extends Controller
         $model = new OptionGroup();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $post = $this->request->post();
+            $post['OptionGroup']['country_id'] = implode(',',$post['OptionGroup']['country_ids'] );
+            if ($model->load($post) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -92,10 +94,17 @@ class OptionGroupController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        $model->country_ids = explode(',', $model->country_id);
+        if ($this->request->isPost){
+            $post = $this->request->post();
+            if($model->load($post)){
+            $model->country_id = implode(',',$post['OptionGroup']['country_ids']);
+           if($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+           }
         }
+        }
+        
 
         return $this->render('update', [
             'model' => $model,
