@@ -16,13 +16,21 @@ $notLinked217 = \backend\models\UniRoom::getCountNotLinkedRooms('217');
 
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="d-flex justify-content-end">
-        <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=228&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&id=%5D"
-                                                     class="btn btn-outline-danger align-self-end"><?=$notLinked228?> rooms Not linked Maldives</a>
+        <div  class="d-flex justify-content-between bg-light border border-danger border-2">
+            <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=228&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&UniRoomSearch%5Bnot_like%5D=1&id=%5D"
+                     class="btn btn-outline-danger align-self-end">Rooms Not linked Maldives</a>
+            </div>
+            <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=228&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&UniRoomSearch%5Bnot_like%5D=0&id=%5D"
+                     class="btn btn-outline-danger align-self-end">All <?=$notLinked228?></a>
+            </div>
         </div>
-<!--    </div>-->
-<!--    <div class="d-flex justify-content-end">-->
-        <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=217&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&id=%5D="
-                                                     class="btn btn-outline-danger align-self-end"><?=$notLinked217?> rooms Not linked Indonesia</a>
+        <div class="d-flex justify-content-between bg-white border border-success border-2">
+            <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=217&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&UniRoomSearch%5Bnot_like%5D=1&id=%5D"
+                     class="btn btn-outline-danger align-self-end">Rooms Not linked Indonesia</a>
+            </div>
+            <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=217&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&UniRoomSearch%5Bnot_like%5D=0&id=%5D"
+                     class="btn btn-outline-danger align-self-end">All <?=$notLinked217?></a>
+            </div>
         </div>
     </div>
     <?php Pjax::begin(); ?>

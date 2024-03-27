@@ -15,6 +15,7 @@ class UniRoomSearch extends UniRoom
     public $wiotto_name;
     public $uni_hotel;
     public $CountryId;
+    public $not_like;
     /**
      * {@inheritdoc}
      */
@@ -22,7 +23,7 @@ class UniRoomSearch extends UniRoom
     {
         return [
             [['id', 'room_type_id', 'hotel_uni_id', 'hotel_id'], 'integer'],
-            [['title', 'description', 'date_add', 'wiotto_name', 'uni_hotel','CountryId'], 'safe'],
+            [['title', 'description', 'date_add', 'wiotto_name', 'uni_hotel','CountryId' , 'not_like'], 'safe'],
         ];
     }
 
@@ -85,8 +86,15 @@ class UniRoomSearch extends UniRoom
         $query->andFilterWhere(['like', 't_uni_room_type.title', $this->title])
             ->andFilterWhere(['like', 't_uni_room_type.description', $this->description])
             ->andFilterWhere(['like', 't_room_type.name', $this->wiotto_name])
-
             ->andFilterWhere(['like', 't_uni_hotel.title', $this->uni_hotel]);
+
+
+        if(($this->not_like == 1))
+        $query->andFilterWhere(['not like', 't_uni_room_type.title', "1N "])
+            ->andFilterWhere(['not like', 't_uni_room_type.title', "2N "])
+            ->andFilterWhere(['not like', 't_uni_room_type.title', "3N "])
+            ->andFilterWhere(['not like', 't_uni_room_type.title', "4N "]);
+
 
         return $dataProvider;
     }
