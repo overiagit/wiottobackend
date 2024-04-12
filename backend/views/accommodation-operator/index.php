@@ -18,7 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Accommodation Operator'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Accommodation Operator')
+            , ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -29,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'name',
             'hotel_id',
+            'supplierOperatorServiceTypeId',
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{update}{room}',
                 'buttons' =>[
@@ -46,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax'=>'0',
                             'id'=>$id,
                         ];
-                        $url = Url::current(['/services', 'accommodation_operator_id' => $key]);
+                        $url = Url::current(['/services', 'supplierOperatorServiceTypeId' => $key]);
                         $icon = Html::tag('span', '&#9760;', ['class' => "glyphicon glyphicon-$iconName"]);
                         return Html::a($icon, $url, $options);
                     },

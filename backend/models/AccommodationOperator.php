@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string|null $name
  * @property int|null $hotel_id
+ * @property int|null $supplierOperatorServiceTypeId
  */
 class AccommodationOperator extends \yii\db\ActiveRecord
 {
@@ -37,10 +38,13 @@ class AccommodationOperator extends \yii\db\ActiveRecord
     {
         return [
             [['id'], 'required'],
-            [['id', 'hotel_id'], 'integer'],
+            [['id', 'hotel_id','supplierOperatorServiceTypeId'], 'integer'],
             [['name'], 'string', 'max' => 255],
+            [['name','supplierOperatorServiceTypeId'], 'safe'],
             [['id'], 'unique'],
-            [['hotel_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hotel::className(), 'targetAttribute' => ['hotel_id' => 'id']],
+            [['hotel_id','supplierOperatorServiceTypeId'], 'exist'
+                , 'skipOnError' => true, 'targetClass' => Hotel::className()
+                , 'targetAttribute' => ['hotel_id' => 'id']],
         ];
     }
 
@@ -53,6 +57,7 @@ class AccommodationOperator extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'hotel_id' => Yii::t('app', 'Hotel ID'),
+            'supplierOperatorServiceTypeId'=>Yii::t('app', 'supplierOperatorServiceTypeId'),
 //            'wiotto_hotel_name' => 'wiotto_hotel_name',
         ];
     }
