@@ -57,6 +57,8 @@ class ServicesSearch extends Services
             return $dataProvider;
         }
 
+        $query->innerJoin('supplieroperatorservicetype', 'services.supplierOperatorServiceTypeId = supplieroperatorservicetype.id');
+        $query->where('supplieroperatorservicetype.serviceType=7');
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
