@@ -39,10 +39,10 @@ class ServicesController extends Controller
      *
      * @return string
      */
-    public function actionIndex($accommodation_operator_id)
+    public function actionIndex($supplierOperatorServiceTypeId)
     {
         $searchModel = new ServicesSearch();
-        $searchModel->accommodation_operator_id = $accommodation_operator_id;
+        $searchModel->supplierOperatorServiceTypeId = $supplierOperatorServiceTypeId;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

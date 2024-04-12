@@ -68,7 +68,7 @@ class ServicesSearch extends Services
             'isInactive' => $this->isInactive,
             'room_type_id' => $this->room_type_id,
             'hotel_id' => $this->hotel_id,
-//            'accommodation_operator_id' => $this->accommodation_operator_id,
+            'accommodation_operator_id' => $this->accommodation_operator_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

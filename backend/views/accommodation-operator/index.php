@@ -47,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax'=>'0',
                             'id'=>$id,
                         ];
-                        $url = Url::current(['/services', 'supplierOperatorServiceTypeId' => $key]);
+                        $url = Url::current(['/services', 'supplierOperatorServiceTypeId' => $model['supplierOperatorServiceTypeId']
+                            ]);
                         $icon = Html::tag('span', '&#9760;', ['class' => "glyphicon glyphicon-$iconName"]);
                         return Html::a($icon, $url, $options);
                     },
