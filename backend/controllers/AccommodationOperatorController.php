@@ -98,7 +98,8 @@ class AccommodationOperatorController extends Controller
         $model = $this->findModel($id);
         $data['hotel'] = Hotel::getHotelDataListByCountry(82);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())
+            && $model->save() && $model->updateService()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

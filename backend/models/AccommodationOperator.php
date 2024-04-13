@@ -85,4 +85,17 @@ class AccommodationOperator extends \yii\db\ActiveRecord
     {
         return new AccommodationOperatorQuery(get_called_class());
     }
+
+
+    public function updateService()
+    {
+        Yii::$app->db2->createCommand('update services set hotel_id = :hotel_id 
+                  , accommodation_operator_id = :accommodation_operator_id
+           where supplierOperatorServiceTypeId = :supplierOperatorServiceTypeId', [
+            ':hotel_id' => $this->hotel_id, ':accommodation_operator_id' => $this->id,
+            ':supplierOperatorServiceTypeId'=>$this->supplierOperatorServiceTypeId,
+        ])->execute();
+
+        return true;
+    }
 }
