@@ -67,13 +67,18 @@ class AccommodationOperatorSearch extends AccommodationOperator
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'hotel_id' => $this->hotel_id,
+            'ifnull(hotel_id,0)' => $this->hotel_id,
             'supplierOperatorServiceTypeId'=>$this->supplierOperatorServiceTypeId,
 
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
 //        $query->andFilterWhere(['like', 'wiotto_hotel_name', $this->wiotto_hotel_name]);
+
+        $query->select(['ifnull(hotel_id,0) as hotel_id','id' ,'name'
+            ,'supplierOperatorServiceTypeId'
+
+        ]);
 
         return $dataProvider;
     }
