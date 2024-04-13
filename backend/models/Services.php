@@ -75,4 +75,15 @@ class Services extends \yii\db\ActiveRecord
     {
         return new ServicesQuery(get_called_class());
     }
+
+    public function getAccommodationOperatorName($accommodation_operator_id)
+    {
+
+        return Yii::$app->db2->createCommand('select name from accommodation_operator
+           where id = :accommodation_operator_id', [
+            ':accommodation_operator_id' => $this->accommodation_operator_id,
+        ])->queryScalar();
+
+
+    }
 }

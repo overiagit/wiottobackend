@@ -33,12 +33,47 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
 //            'supplierOperatorServiceTypeId',
             'name',
-            'minimumPax',
-            'maximumPax',
+//            'minimumPax',
+            [
+                'attribute' => 'minimumPax',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
+//            'maximumPax',
+            [
+                'attribute' => 'maximumPax',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
             //'isInactive',
-            'room_type_id',
-            'hotel_id',
-            'accommodation_operator_id',
+//            'room_type_id',
+            [
+                'attribute' => 'room_type_id',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
+//            'hotel_id',
+            [
+                'attribute' => 'hotel_id',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
+//            'accommodation_operator_id',
+            [
+                'attribute' => 'accommodation_operator_id',
+                'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
+            ],
+            [
+                'attribute' => 'hotel_name',
+                'value' => function ($model, $key, $index, $column) {
+                    return  $model->getAccommodationOperatorName($model['accommodation_operator_id']);
+                },
+                'filter' => Html::activeInput('text',$searchModel,'hotel_name',
+                    ['class' => 'form-control', 'prompt' => 'Все']),
+            ],
+            'date_add',
+            'date_upd',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Services $model, $key, $index, $column) {

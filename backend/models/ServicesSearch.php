@@ -11,6 +11,8 @@ use backend\models\Services;
  */
 class ServicesSearch extends Services
 {
+
+    public $hotel_name;
     /**
      * {@inheritdoc}
      */
@@ -19,7 +21,7 @@ class ServicesSearch extends Services
         return [
             [['id', 'supplierOperatorServiceTypeId', 'minimumPax', 'maximumPax', 'isInactive', 'room_type_id'
                 , 'hotel_id' ,'accommodation_operator_id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'hotel_name'], 'safe'],
         ];
     }
 
@@ -58,20 +60,36 @@ class ServicesSearch extends Services
         }
 
         $query->innerJoin('supplieroperatorservicetype', 'services.supplierOperatorServiceTypeId = supplieroperatorservicetype.id');
+        $query->innerJoin('accommodation_operator', 'services.accommodation_operator_id = accommodation_operator.id');
+
         $query->where('supplieroperatorservicetype.serviceType=7');
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'supplierOperatorServiceTypeId' => $this->supplierOperatorServiceTypeId,
-            'minimumPax' => $this->minimumPax,
-            'maximumPax' => $this->maximumPax,
-            'isInactive' => $this->isInactive,
-            'room_type_id' => $this->room_type_id,
-            'hotel_id' => $this->hotel_id,
-            'accommodation_operator_id' => $this->accommodation_operator_id,
+            'services.id' => $this->id,
+            'services.supplierOperatorServiceTypeId' => $this->supplierOperatorServiceTypeId,
+            'services.minimumPax' => $this->minimumPax,
+            'services.maximumPax' => $this->maximumPax,
+            'services.isInactive' => $this->isInactive,
+            'ifnull(services.room_type_id,0)' => $this->room_type_id,
+            'ifnull(services.hotel_id,0)' => $this->hotel_id,
+//            'hotel_name' => $this->hotel_name,
+            'services.accommodation_operator_id' => $this->accommodation_operator_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'services.name', $this->name]);
+        $query->andFilterWhere(['like', 'accommodation_operator.name', $this->hotel_name]);
+
+
+        $query->select(['ifnull(services.accommodation_operator_id,0) as accommodation_operator_id','services.id'
+            ,'services.name'
+            ,'services.minimumPax'
+            ,'services.maximumPax'
+            ,'services.isInactive'
+             ,'ifnull(services.room_type_id,0) as room_type_id'
+            ,'ifnull(services.hotel_id,0) as hotel_id'
+            ,'accommodation_operator.name as hotel_name'
+            ,'services.date_add','services.date_upd'
+        ]);
 
         return $dataProvider;
     }

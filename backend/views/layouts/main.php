@@ -43,6 +43,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'FileManager', 'url' => ['/filemanager']];
         $menuItems[] = ['label' => 'Uni-Hotels', 'url' => ['/uni-hotel']];
         $menuItems[] = ['label' => 'Astro-Hotels', 'url' => ['/accommodation-operator']];
+        $menuItems[] = ['label' => 'Astro-Rooms', 'url' => ['/services']];
         $menuItems[] = ['label' => 'Wiotto-Hotels', 'url' => ['/hotel']];
         $menuItems[] = ['label' => 'Best-For-You', 'url' => ['/best-for-you']];
         $menuItems[] = ['label' => 'Plan you trip', 'url' => ['/plan-trip']];

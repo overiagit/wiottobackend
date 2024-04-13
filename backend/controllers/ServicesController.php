@@ -39,7 +39,7 @@ class ServicesController extends Controller
      *
      * @return string
      */
-    public function actionIndex($supplierOperatorServiceTypeId)
+    public function actionIndex($supplierOperatorServiceTypeId=null)
     {
         $searchModel = new ServicesSearch();
         $searchModel->supplierOperatorServiceTypeId = $supplierOperatorServiceTypeId;
@@ -104,7 +104,7 @@ class ServicesController extends Controller
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
 //            return $this->redirect(['view', 'id' => $model->id]);
-            return $this->actionIndex($model->accommodation_operator_id);
+            return $this->actionIndex();
         }
         $data['room'] = Room::getDataList($model->hotel_id);
         $data['villa'] =  Villa::getList();
