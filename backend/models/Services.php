@@ -35,6 +35,17 @@ class Services extends \yii\db\ActiveRecord
         return Yii::$app->get('db2');
     }
 
+    public static function getCountNotLinkedRooms()
+    {
+        return  self::find()->select(['distinct services.id'])
+            ->innerJoin('supplieroperatorservicetype', 'supplieroperatorservicetype.id = services.supplierOperatorServiceTypeId')
+            ->innerJoin('accommodation_operator', 'accommodation_operator.id = supplieroperatorservicetype.supplierServiceOperatorId')
+            ->where(['is', 'services.room_type_id'
+                , new \yii\db\Expression('null')])
+
+            ->count();
+    }
+
     /**
      * {@inheritdoc}
      */

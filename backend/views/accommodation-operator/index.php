@@ -12,6 +12,7 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Astro hotels');
 $this->params['breadcrumbs'][] = $this->title;
+$notLinked82 = \backend\models\AccommodationOperator::getCountNotLinkedHotels('82');
 ?>
 <div class="accommodation-operator-index">
 
@@ -21,6 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Accommodation Operator')
             , ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <div class="d-flex justify-content-end">
+        <div  class="d-flex justify-content-between bg-light border border-danger border-2">
+            <div><a  href=  "accommodation-operator?AccommodationOperatorSearch%5Bid%5D=&AccommodationOperatorSearch%5Bname%5D=&AccommodationOperatorSearch%5Bhotel_id%5D=0&AccommodationOperatorSearch%5BsupplierOperatorServiceTypeId%5D="
+                     class="btn btn-outline-danger align-self-end">Hotels Not linked Seychels <?=$notLinked82?></a>
+            </div>
+        </div>
+    </div>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

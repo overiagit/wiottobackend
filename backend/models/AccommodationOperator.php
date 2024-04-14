@@ -31,6 +31,14 @@ class AccommodationOperator extends \yii\db\ActiveRecord
         return Yii::$app->get('db2');
     }
 
+    public static function getCountNotLinkedHotels(string $string)
+    {
+        return  self::find()->select(['distinct accommodation_operator.id'])
+              ->where(['is', 'accommodation_operator.hotel_id'
+                , new \yii\db\Expression('null')])
+            ->count();
+    }
+
     /**
      * {@inheritdoc}
      */

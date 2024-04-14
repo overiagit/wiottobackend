@@ -12,6 +12,7 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Astro rooms');
 $this->params['breadcrumbs'][] = $this->title;
+$notLinked82 = \backend\models\Services::getCountNotLinkedRooms('82');
 ?>
 <div class="services-index">
 
@@ -20,7 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Services'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="d-flex justify-content-end">
+        <div  class="d-flex justify-content-between bg-light border border-danger border-2">
+            <div><a  href=  "services?ServicesSearch%5Bid%5D=&ServicesSearch%5Bname%5D=&ServicesSearch%5BminimumPax%5D=&ServicesSearch%5BmaximumPax%5D=&ServicesSearch%5Broom_type_id%5D=0&ServicesSearch%5Bhotel_id%5D=&ServicesSearch%5Baccommodation_operator_id%5D=&ServicesSearch%5Bhotel_name%5D="
+                     class="btn btn-outline-danger align-self-end">Rooms Not linked Seychels  <?=$notLinked82?></a>
+            </div>
+            <!--            <div><a  href=  "uni-room?UniRoomSearch%5Bid%5D=&UniRoomSearch%5Btitle%5D=&UniRoomSearch%5Broom_type_id%5D=0&UniRoomSearch%5Bwiotto_name%5D=&UniRoomSearch%5BCountryId%5D=228&UniRoomSearch%5Bhotel_uni_id%5D=&UniRoomSearch%5Buni_hotel%5D=&UniRoomSearch%5Bdate_add%5D=&UniRoomSearch%5Bnot_like%5D=0&id=%5D"-->
+            <!--                     class="btn btn-outline-danger align-self-end">All --><?php //=$notLinked82?><!--</a>-->
+            <!--            </div>-->
+        </div>
 
+    </div>
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
