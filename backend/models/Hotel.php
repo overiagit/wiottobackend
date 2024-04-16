@@ -24,6 +24,7 @@ use yii\helpers\ArrayHelper;
  * @property int $on_request
  * @property UniHotel[] $UniHotels
  * @property array $features
+ * @property int|null $active
  */
 
 
@@ -61,7 +62,7 @@ class Hotel extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'type_id', 'town_id', 'name', 'country_id'], 'required', 'message' => 'Requered filds'],
-            [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id', ], 'integer', 'message' => 'Requered int'],
+            [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id',  'active',], 'integer', 'message' => 'Requered int'],
             [['latitude', 'longitude'], 'number', 'message' => 'Requered number'],
             [['comment', 'note', 'condition'], 'string'],
             [['name'], 'string', 'max' => 128],
@@ -88,6 +89,7 @@ class Hotel extends \yii\db\ActiveRecord
             'country_id' => 'Country ID',
             'island_id' => 'Island ID',
             'condition' => 'Condition',
+            'active' => 'Active',
 //            'images' => 'Images'
         ];
     }
@@ -135,7 +137,6 @@ class Hotel extends \yii\db\ActiveRecord
         $ids = $this->hasMany(HotelImage::className()
             , ['hotel_id' => 'id'])
             ->select("GROUP_CONCAT(id)")->scalar()??'no';
-
         return substr($ids,0,10).' ...';
     }
 
