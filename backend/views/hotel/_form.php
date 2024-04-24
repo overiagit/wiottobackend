@@ -155,10 +155,18 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group row">
         <div class="col col-md-10">
-        <?= $form->field($model, 'note')->textarea(['id'=>'txt_note_en','rows' => 6]) ?>
+        <?= $form->field($model, 'note')->textarea(['id'=>'txt_note','rows' => 6]) ?>
         </div>
         <div class="col col-md-2 align-content-center">
-             <?=Html::button('EN',['id'=>'btn_note_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+             <?=Html::button('NOTE',['id'=>'btn_note_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10">
+            <?= Html::textarea('note_en', $data['note']['en']['note'],['id'=>'txt_note_en','class'=>'form-control', 'rows'=>6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('EN',['id'=>'btn_note_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
         </div>
     </div>
     <div class="form-group row">
@@ -180,7 +188,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'country_id')->hiddenInput()->label(false); ?>
     <div class="form-group row">
         <div class="col col-md-10">
-            <?= $form->field($model, 'condition')->textarea(['id'=>'txt_condition_en','rows' => 6]) ?>
+            <?= $form->field($model, 'condition')->textarea(['id'=>'txt_condition','rows' => 6]) ?>
+        </div>
+        <div class="col col-md-2 align-content-center">
+            <?=Html::button('CONDITION',['id'=>'btn_condition_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col col-md-10">
+            <?= Html::textarea('condition_en', $data['note']['en']['condition'],['id'=>'txt_condition_en','class'=>'form-control', 'rows'=>6]) ?>
         </div>
         <div class="col col-md-2 align-content-center">
             <?=Html::button('EN',['id'=>'btn_condition_en','class'=>"btn btn-primary btnNoteCond", 'data-toggle'=>"modal" ,'data-target'=>"#frmEditor"]); ?>

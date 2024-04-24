@@ -127,8 +127,8 @@ class HotelController extends Controller
                     $note_en = new HotelNote();
                     $note_en->hotel_id = $model->id;
                     $note_en->lang = 'en';
-                    $note_en->note = trim($post['Hotel']['note']);
-                    $note_en->condition = trim($post['Hotel']['condition']);
+                    $note_en->note = trim($post['note_en']);
+                    $note_en->condition = trim($post['condition_en']);
                     $note_en->id = HotelNote::getLastId()+1;
 
                     $note_ru = new HotelNote();
@@ -236,10 +236,10 @@ class HotelController extends Controller
             if ($model->load($post)) {
                 $data['note']['ru']['condition'] = $post['condition_ru'];
                 $data['note']['fr']['condition'] = $post['condition_fr'];
-                $data['note']['en']['condition'] = $post['Hotel']['condition'];
+                $data['note']['en']['condition'] = $post['condition_en'];
                 $data['note']['ru']['note'] = $post['note_ru'];
                 $data['note']['fr']['note'] = $post['note_fr'];
-                $data['note']['en']['note'] = trim($post['Hotel']['note']) != "";
+                $data['note']['en']['note'] = $post['note_en'];//trim($post['Hotel']['note']) != "";
 
 
                 if((!empty($data['note']['en']['note']) && $data['note']['en']['note'] !='') || !empty($data['note']['en']['condition']))
