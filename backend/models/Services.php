@@ -42,6 +42,7 @@ class Services extends \yii\db\ActiveRecord
             ->innerJoin('accommodation_operator', 'accommodation_operator.id = supplieroperatorservicetype.supplierServiceOperatorId')
             ->where(['is', 'services.room_type_id'
                 , new \yii\db\Expression('null')])
+            ->andWhere('supplieroperatorservicetype.serviceType=7')
 
             ->count();
     }

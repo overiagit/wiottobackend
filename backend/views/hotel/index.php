@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'country_id',
 //            'type_id',
@@ -39,6 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'comment:ntext',
             //'note:ntext',
             'location_id',
+            [
+                'attribute' => 'active',
+                'headerOptions' => [ 'style' => 'width: 10%; max-width:80px;word-wrap:normal;white-space:pre-line;' ],
+                'contentOptions' => [ 'style' => 'width: 10%; max-width:80px;word-wrap:normal;white-space:pre-line;' ],
+            ],
             //'country_id',
             //'island_id',
             //'condition:ntext',
@@ -60,8 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'
                 ,'template'=>'{update}{room}{photo}'
-                ,
-                'buttons' =>[
+                ,'buttons' =>[
                     'room'=>function($url, $model, $key){
                         $iconName = 'info-sign';
                         $title = \Yii::t('app', 'Rooms');
