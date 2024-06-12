@@ -27,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'type_id',
             'town_id',
             'name',
+            'markup',
+            'active',
             'latitude',
             'longitude',
             'town_region_id',

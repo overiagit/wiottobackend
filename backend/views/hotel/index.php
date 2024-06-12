@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'comment:ntext',
             //'note:ntext',
             'location_id',
+            'markup',
             [
                 'attribute' => 'active',
                 'headerOptions' => [ 'style' => 'width: 10%; max-width:80px;word-wrap:normal;white-space:pre-line;' ],

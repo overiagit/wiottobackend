@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
  * @property UniHotel[] $UniHotels
  * @property array $features
  * @property int|null $active
+ * @property float|null $markup
  */
 
 
@@ -63,7 +64,7 @@ class Hotel extends \yii\db\ActiveRecord
         return [
             [['id', 'type_id', 'town_id', 'name', 'country_id'], 'required', 'message' => 'Requered filds'],
             [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id',  'active',], 'integer', 'message' => 'Requered int'],
-            [['latitude', 'longitude'], 'number', 'message' => 'Requered number'],
+            [['latitude', 'longitude','markup'], 'number', 'message' => 'Requered number'],
             [['comment', 'note', 'condition'], 'string'],
             [['name'], 'string', 'max' => 128],
             [['id'], 'unique'],
@@ -90,6 +91,7 @@ class Hotel extends \yii\db\ActiveRecord
             'island_id' => 'Island ID',
             'condition' => 'Condition',
             'active' => 'Active',
+            'markup'=>'Markup',
 //            'images' => 'Images'
         ];
     }

@@ -113,6 +113,24 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group row">
         <div class="col-6 col-md-3">
+    <?= $form->field($model, 'markup')->textInput(['type'=>'number','min'=>'0.00', 'max'=>'100', 'step'=>".01"]) ?>
+
+        </div>
+        <div class="col-6 col-md-7 mt-5 d-flex justify-content-end">
+        <?= $form->field($model, 'active')->checkbox() ?>
+    </div>
+    </div>
+
+
+    <div class="form-group row">
+    <div class="col-6 col-md-3">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+ 
+    </div>
+
+    <div class="form-group row">
+        <div class="col-6 col-md-3">
     <?= $form->field($model, 'location_id')->textInput(['type'=>'number','maxlength' => true]) ?>
 
         </div>
@@ -240,7 +258,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-    <?= $form->field($model, 'active')->checkbox() ?>
+   
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

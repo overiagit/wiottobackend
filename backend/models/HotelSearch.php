@@ -22,7 +22,7 @@ class HotelSearch extends Hotel
         return [
             [['id', 'type_id', 'town_id', 'town_region_id', 'location_id', 'country_id', 'island_id','active'], 'integer'],
             [['name', 'comment', 'note', 'condition' , 'images','active'], 'safe'],
-            [['latitude', 'longitude'], 'number'],
+            [['latitude', 'longitude','markup'], 'number'],
         ];
     }
 
@@ -57,13 +57,13 @@ class HotelSearch extends Hotel
             ,'t_hotel.island_id','t_hotel.name','t_hotel.note','t_hotel.condition'
             ,'t_hotel.latitude','t_hotel.longitude'
             , 'ifnull(GROUP_CONCAT(DISTINCT wiotto_uni_db.fe_HotelsImages.id),"no") as images'
-            ,'t_hotel.tourplan_code','t_hotel.active'
+            ,'t_hotel.tourplan_code','t_hotel.active','t_hotel.markup'
         ]);
 
         $query->groupBy(['t_hotel.id','t_hotel.type_id'
             ,'t_hotel.town_id','t_hotel.town_region_id','t_hotel.location_id','t_hotel.country_id'
             ,'t_hotel.island_id','t_hotel.name','t_hotel.note','t_hotel.condition'
-            ,'t_hotel.latitude','t_hotel.longitude' ,'t_hotel.tourplan_code','t_hotel.active' ]);
+            ,'t_hotel.latitude','t_hotel.longitude' ,'t_hotel.tourplan_code','t_hotel.active','t_hotel.markup' ]);
 
 
         $dataProvider = new ActiveDataProvider([
@@ -91,6 +91,7 @@ class HotelSearch extends Hotel
             'country_id' => $this->country_id,
             'island_id' => $this->island_id,
             'active' => $this->active,
+            'markup' => $this->markup,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
