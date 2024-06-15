@@ -9,6 +9,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Hotel;
 
 /**
  * CouponController implements the CRUD actions for Coupon model.
@@ -73,7 +74,7 @@ class CouponController extends Controller
         $data['description']['en']['description'] = "";
         $data['description']['ru']['description'] = "";
         $data['description']['fr']['description'] = "";
-
+        $data['hotel'] = Hotel::getHotelDataList();
 
         if ($this->request->isPost) {
             $post = $this->request->post();
@@ -149,7 +150,8 @@ class CouponController extends Controller
         $data['description']['en'] = CouponLang::findOne(["id"=>$id,'lang'=>'en']);
         $data['description']['ru'] = CouponLang::findOne(["id"=>$id,'lang'=>'ru']);
         $data['description']['fr'] = CouponLang::findOne(["id"=>$id,'lang'=>'fr']);
-
+        $data['hotel'] = Hotel::getHotelDataList();
+        
         if($data['description']['en'] == null){
             $data['description']['en'] =  new CouponLang();
             $data['description']['en']['id']= $id;

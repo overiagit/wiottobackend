@@ -20,6 +20,7 @@ use Yii;
  * @property int|null $apply_price_to
  * @property int|null $order
  * @property int $active
+ * @property int $hotel_id
  */
 class Coupon extends \yii\db\ActiveRecord
 {
@@ -38,9 +39,9 @@ class Coupon extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'percent'], 'required'],
-            [['percent', 'active'], 'integer'],
+            [['percent', 'active','hotel_id'], 'integer'],
             [['date_from', 'date_to', 'price_from','price_to','order'
-                ,'apply_price_from','apply_price_to',], 'safe'],
+                ,'apply_price_from','apply_price_to','hotel_id'], 'safe'],
             [['name', 'note','description'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
@@ -65,6 +66,7 @@ class Coupon extends \yii\db\ActiveRecord
             'apply_price_to' => Yii::t('app', 'Apply Price To'),
             'order' => Yii::t('app', 'Order'),
             'active' => Yii::t('app', 'Active'),
+            'hotel_id' => Yii::t('app', 'Hotel'),
         ];
     }
 

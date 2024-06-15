@@ -105,6 +105,16 @@ use kartik\widgets\DatePicker;
 
     </div>
     <div class="form-group row">
+        <div class="col col-md-6 ">
+        <?= $form->field($model, 'hotel_id')->dropDownList(
+                $data['hotel'],
+                ['prompt' => '', 'id' => 'select-hotel_id'
+                // ,'onChange'=>'$("#txtHotelId").val(this.value);'
+                ]
+            )->label('Wiotto hotel') ?>
+        </div>
+    </div>
+    <div class="form-group row">
         <div class="col col-md-1 ">
     <?= $form->field($model, 'active')->checkbox() ?>
         </div>

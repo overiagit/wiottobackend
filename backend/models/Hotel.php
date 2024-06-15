@@ -156,10 +156,13 @@ class Hotel extends \yii\db\ActiveRecord
             ->leftJoin('t_hotel_type', 't_hotel.type_id = t_hotel_type.id')
             ->leftJoin('t_town_region', 't_hotel.town_region_id = t_town_region.id')
             ->leftJoin('t_island', 't_hotel.island_id = t_island.id')
+            ->leftJoin('t_country', 't_hotel.country_id = t_country.id')
             ->select(["`t_hotel`.`id` as `id`"
                 , "concat(`t_hotel`.`name`,' ', ifnull(`t_hotel_type`.`name`,'') 
-                 , ifnull( concat(' region:' ,`t_town_region`.`name` ),'') 
-                 , ifnull(concat(' island:',`t_island`.`name` ),'')) as `name`"])
+                 , ifnull(concat(' region:' ,`t_town_region`.`name` ),'') 
+                 , ifnull(concat(' island:',`t_island`.`name` ),'')
+                 , ifnull(concat(' ',`t_country`.`name` ),'')
+                 ) as `name`"])
             ->orderBy(['`t_hotel`.`name`'=>SORT_ASC])
                  ->all(), 'id', 'name');
     }

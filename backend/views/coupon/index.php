@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'apply_price_to',
                 'headerOptions' => [ 'style' => 'width: 18%; max-width:120px;word-wrap:normal;white-space:pre-line;' ],
             ],
+            'hotel_id',
             'active',
             ['class' => 'yii\grid\ActionColumn'],
         ],

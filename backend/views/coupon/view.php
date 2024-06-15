@@ -82,6 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'apply_price_from',
             'apply_price_to',
             'order',
+            'hotel_id',
             'active',
         ],
     ]) ?>

@@ -19,7 +19,7 @@ class CouponSearch extends Coupon
         return [
             [['id', 'percent', 'active'], 'integer'],
             [['name', 'note', 'date_from', 'date_to','description'
-                , 'price_from', 'price_to', 'apply_price_from', 'apply_price_to','order'], 'safe'],
+                , 'price_from', 'price_to', 'apply_price_from', 'apply_price_to','order','hotel_id'], 'safe'],
         ];
     }
 
@@ -69,6 +69,7 @@ class CouponSearch extends Coupon
             'price_to' => $this->price_to,
             'apply_price_from' => $this->apply_price_from,
             'apply_price_to' => $this->apply_price_to,
+            'hotel_id' => $this->hotel_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
